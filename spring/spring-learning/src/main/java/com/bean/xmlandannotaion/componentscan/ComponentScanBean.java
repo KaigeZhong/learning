@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ComponentScanBean {
 
+  public ComponentScanBean() {
+    System.out.println("instance ComponentScanBean");
+  }
+
   @Autowired
   ComponentScanAutowiredBean componentScanAutowiredBean;
 
