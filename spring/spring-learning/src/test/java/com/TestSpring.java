@@ -1,6 +1,6 @@
 package com;
 
-import com.bean.annotation.configuration.ConfigurationBean;
+import com.bean.annotation.configuration.basic.ConfigurationBean;
 import com.bean.xml.aop.AopTargetObjectI;
 import com.bean.xml.factorybean.BeanByFactoryBean;
 import com.bean.xmlandannotaion.annotationconfig.XmlAnnotationBean;
@@ -39,14 +39,17 @@ public class TestSpring {
   @Test
   public void testXmlAnnotationConfig() {
     /*
-    annotation-config会注入这四个BeanPostProcessor: CommonAnnotationBeanPostProcessor,AutowiredAnnotationBeanPostProcessor, PersistenceAnnotationBeanPostProcessor, RequiredAnnotationBeanPostProcessor
+    annotation-config会注入这四个BeanPostProcessor: CommonAnnotationBeanPostProcessor,
+    AutowiredAnnotationBeanPostProcessor, PersistenceAnnotationBeanPostProcessor,
+    RequiredAnnotationBeanPostProcessor
     在createBeanInstance之后，populateBean之前，会调用applyMergedBeanDefinitionPostProcessors
     去执行这这四个bean post processor的postProcessMergedBeanDefinition方法，将类上的注解信息注册到beanDefinition
     CommonAnnotationBeanPostProcessor: 注册@PostConstruct, @PreDestroy
     AutowiredAnnotationBeanPostProcessor: 注册@Autowired
     RequiredAnnotationBeanPostProcessor: @Required
      */
-    ApplicationContext context = new ClassPathXmlApplicationContext("application-annotation-config.xml");
+    ApplicationContext context =
+      new ClassPathXmlApplicationContext("application-annotation-config.xml");
 
     XmlAnnotationBean xmlAnnotationBean = (XmlAnnotationBean) context.getBean("xmlAnnotationBean");
     System.out.println(xmlAnnotationBean.getAutoWiredBean());
@@ -55,10 +58,11 @@ public class TestSpring {
   @Test
   public void testXmlComponentScan() {
     /*
-    component-scan会注入BeanFactoryPostProcessor: ConfigurationClassPostProcessor
-    会在AbstractApplicationContext -> refresh -> postProcessBeanDefinitionRegistry处被调用.
+    component-scan会在obtainFreshBeanFactory() -> ContextNameSpaceHandler ->
+    ComponentScanBeanDefinitionParser进行bean扫描注册
      */
-    ApplicationContext context = new ClassPathXmlApplicationContext("application-component-scan.xml");
+    ApplicationContext context =
+      new ClassPathXmlApplicationContext("application-component-scan.xml");
 
     ComponentScanBean componentScanBean = (ComponentScanBean) context.getBean("componentScanBean");
     System.out.println(componentScanBean.getComponentScanAutowiredBean());
@@ -68,6 +72,12 @@ public class TestSpring {
   public void testConfiguration() {
     /*
     @Configuration会注入BeanFactoryPostProcessor: ConfigurationClassPostProcessor
+    ConfigurationClassPostProcessor会去beanDefinitionMap查找先前注册的config class(@Configuration)来处理:
+    处理@PropertySource标签，用来解析属性文件并设置到Environment中。
+    处理@ComponentScan标签，扫描package下的所有Class并进行迭代解析。
+    处理@Import标签。
+    处理@ImportResource标签。
+    处理@Bean标签。
      */
     ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigurationBean.class);
   }

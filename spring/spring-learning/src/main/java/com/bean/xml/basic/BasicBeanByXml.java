@@ -1,4 +1,4 @@
-package com.bean.xml;
+package com.bean.xml.basic;
 
 
 public class BasicBeanByXml {
