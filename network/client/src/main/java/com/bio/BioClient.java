@@ -38,10 +38,10 @@ public class BioClient {
             reader = new BufferedReader(new InputStreamReader(sk
                     .getInputStream()));
             wtr = new PrintWriter(sk.getOutputStream());
-            String get = keyin.readLine();
 
             while (true)
             {
+                String get = keyin.readLine();
                 if (get != null & get.length() > 0)
                 {
                     wtr.println(get);
@@ -49,12 +49,12 @@ public class BioClient {
 //                  wtr.close();
 //                  System.out.println(get + "发送完毕");
                 }
-                if (reader != null)
-                {
-                    String line = reader.readLine();
-                    System.out.println("从服务器来的信息：" + line);
-
-                }
+//                if (reader != null)
+//                {
+//                    String line = reader.readLine();
+//                    System.out.println("从服务器来的信息：" + line);
+//
+//                }
 
             }
         }

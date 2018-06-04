@@ -46,12 +46,10 @@ public class BioServer {
                 wtr = new PrintWriter(sk.getOutputStream());
                 rdr = new BufferedReader(new InputStreamReader(sk
                         .getInputStream()));
-                String line = rdr.readLine();
-                System.out.println("从客户端来的信息：" + line);
-//              特别，下面这句得加上     “\n”,
-//                wtr.println("你好，服务器已经收到您的信息！'" + line + "'\n");
-//                wtr.flush();
-//                System.out.println("已经返回给客户端！");
+                while (true) {
+                    String line = rdr.readLine();
+                    System.out.println("从客户端来的信息：" + line);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
