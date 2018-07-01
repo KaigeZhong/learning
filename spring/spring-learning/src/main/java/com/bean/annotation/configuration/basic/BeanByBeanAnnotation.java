@@ -4,4 +4,5 @@ public class BeanByBeanAnnotation {
   public BeanByBeanAnnotation() {
     System.out.println("instance BeanByAnnotation");
   }
+
 }

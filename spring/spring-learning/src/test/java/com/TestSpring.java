@@ -1,6 +1,14 @@
 package com;
 
+import com.bean.annotation.configuration.Import.BeanByImported;
+import com.bean.annotation.configuration.Import.ConfigurationByImported;
+import com.bean.annotation.configuration.Import.ConfigurationImport;
+import com.bean.annotation.configuration.basic.BeanByBeanAnnotation;
 import com.bean.annotation.configuration.basic.ConfigurationBean;
+import com.bean.annotation.configuration.componentscan.BeanByScan;
+import com.bean.annotation.configuration.componentscan.ConfigurationBeanScan;
+import com.bean.annotation.configuration.propertysource.BeanByBeanAnnotationPropertySource;
+import com.bean.annotation.configuration.propertysource.ConfigurationBeanProperty;
 import com.bean.xml.aop.AopTargetObjectI;
 import com.bean.xml.factorybean.BeanByFactoryBean;
 import com.bean.xmlandannotaion.annotationconfig.XmlAnnotationBean;
@@ -80,5 +88,35 @@ public class TestSpring {
     处理@Bean标签。
      */
     ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigurationBean.class);
+    BeanByBeanAnnotation beanByBeanAonotation =
+      (BeanByBeanAnnotation) ctx.getBean("beanByBeanAonotation");
+    System.out.println(beanByBeanAonotation);
+  }
+
+  @Test
+  public void testConfigurationScan() {
+    /*
+     */
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigurationBeanScan.class);
+
+    BeanByScan beanByScan = (BeanByScan) ctx.getBean("beanByScan");
+    System.out.println(beanByScan);
+  }
+
+  @Test
+  public void testConfigurationPropertySource() {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigurationBeanProperty.class);
+
+    BeanByBeanAnnotationPropertySource beanByBeanAnnotation =
+      (BeanByBeanAnnotationPropertySource) ctx.getBean("beanByBeanAnnotationPropertySource");
+    System.out.println(beanByBeanAnnotation.getName());
+  }
+
+  @Test
+  public void testConfigurationImport() {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigurationImport.class);
+    BeanByImported beanByImported = (BeanByImported) ctx.getBean("beanByImported");
+
+    System.out.println(beanByImported);
   }
 }

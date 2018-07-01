@@ -1,4 +1,4 @@
-package com.bean.annotation.configuration.basic;
+package com.bean.annotation.configuration.componentscan;
 
 import org.springframework.stereotype.Component;
 
