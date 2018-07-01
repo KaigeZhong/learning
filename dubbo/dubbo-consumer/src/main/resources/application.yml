@@ -1,0 +1,17 @@
+# Spring boot application
+spring:
+  application:
+    name: dubbo-consumer-demo
+
+server:
+  port: 8080
+
+
+#################### Dubbo Config #############
+dubbo:
+  application: # ApplicationConfig Bean
+    id: dubbo-consumer-demo
+    name: dubbo-consumer-demo
+  registry: # RegistryConfig Bean
+    id: zookeeper-registry
+    address: zookeeper://localhost:2181

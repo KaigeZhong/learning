@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoConsumerController {
 
-  @Reference(version = "${demo.service.version}",
-    application = "${dubbo.application.id}",
-    registry = "zookeeper-registry")
+  @Reference(application = "${dubbo.application.id}",
+    registry = "${dubbo.registry.id}")
   private DemoService demoService;
 
   @RequestMapping("/sayHello")
