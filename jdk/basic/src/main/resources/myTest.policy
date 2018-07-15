@@ -1,5 +1,11 @@
  grant 
  { 
   permission java.io.FilePermission 
-    "/home/kaige/work/policy/*", "write"; 
+    "/home/kaige/work/policy/*", "write";
  };
+ grant codeBase "file:///home/kaige/work/research/learning/jdk/basic/target/classes/com/policy/utils/*"
+ {
+  permission java.io.FilePermission
+     "/home/kaige/work/policy_read_only/*", "write";
+ };
+
