@@ -1,0 +1,5 @@
+ grant 
+ { 
+  permission java.io.FilePermission 
+    "/home/kaige/work/policy/*", "write"; 
+ };
