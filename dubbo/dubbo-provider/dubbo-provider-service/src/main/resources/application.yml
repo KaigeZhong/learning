@@ -6,8 +6,6 @@ spring:
 
 ##################### Dubbo Config #############
 dubbo:
-  scan:  # Base packages to scan Dubbo Components (e.g @Service , @Reference)
-    base-packages: com.alibaba.boot.dubbo.demo.provider.service
   application: # ApplicationConfig Bean
     id: dubbo-provider-demo
     name: dubbo-provider-demo
@@ -17,5 +15,4 @@ dubbo:
     port: 12345
   registry: # RegistryConfig Bean
     id: my-registry
-    address: zookeeper://localhost:2181
-
+    address: zookeeper://127.0.0.1:2182

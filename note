@@ -30,3 +30,7 @@ stream->function->default
 
 InputStream, OutputStream
 
+
+
+CR(\r): Carriage Return 回车，回到当前行左边界
+LF(\n)或NL: Line Feed 换行，向下移一行
