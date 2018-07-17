@@ -15,7 +15,7 @@ public class TestMetric {
 //        testCounter();
 //        testMeters();
 //        testHistogram();
-        testTimer();
+//        testTimer();
     }
 
     static final Queue<String> q = new LinkedList<String>();
