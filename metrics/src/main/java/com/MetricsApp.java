@@ -1,7 +1,7 @@
 package com;
 
 import com.codahale.metrics.MetricRegistry;
-import com.service.MetricService;
+import com.service.TimerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,10 +16,10 @@ public class MetricsApp {
 
     MetricRegistry metricRegistry;
 
-    MetricService metricService;
+    TimerService metricService;
 
     @Autowired
-    public MetricsApp(MetricRegistry metricRegistry, MetricService metricService) {
+    public MetricsApp(MetricRegistry metricRegistry, TimerService metricService) {
         this.metricRegistry = metricRegistry;
         this.metricService = metricService;
         Executors.newSingleThreadExecutor().execute(metricService);

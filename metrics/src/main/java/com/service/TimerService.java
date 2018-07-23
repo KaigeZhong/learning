@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Random;
 
 @Component
-public class MetricService implements Runnable {
+public class TimerService implements Runnable {
     @Autowired
     public MetricRegistry metricRegistry;
 

@@ -11,38 +11,15 @@ public class TestMetric {
     static final MetricRegistry registry = new MetricRegistry();
 
     public static void main(String[] args) {
-//        testGauge();
 //        testCounter();
 //        testMeters();
 //        testHistogram();
 //        testTimer();
     }
 
-    static final Queue<String> q = new LinkedList<String>();
-
-    public static void testGauge() {
-        ConsoleReporter reporter = ConsoleReporter.forRegistry(registry).build();
-        reporter.start(3, TimeUnit.SECONDS);
-        registry.register(MetricRegistry.name(TestMetric.class, "queue", "size"),
-                new Gauge<Integer>() {
-
-                    public Integer getValue() {
-                        return q.size();
-                    }
-                });
-
-        while (true) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            q.add("Job-xxx");
-        }
-    }
-
 
     public static Counter pendingJobs;
+    static final Queue<String> q = new LinkedList<String>();
 
     public static Random random = new Random();
 
@@ -125,26 +102,6 @@ public class TestMetric {
 
             }
             histogram.update(random.nextInt(100000));
-        }
-
-    }
-
-    public static void testTimer() {
-        MetricRegistry registry = new MetricRegistry();
-        ConsoleReporter reporter = ConsoleReporter.forRegistry(registry).build();
-        reporter.start(1, TimeUnit.SECONDS);
-
-        Timer timer = registry.timer(MetricRegistry.name(TestMetric.class, "get-latency"));
-
-        Timer.Context ctx;
-
-        while (true) {
-            ctx = timer.time();
-            try {
-                Thread.sleep(random.nextInt(1000));
-            } catch (InterruptedException e) {
-            }
-            ctx.stop();
         }
 
     }
