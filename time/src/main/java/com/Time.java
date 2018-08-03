@@ -1,21 +1,25 @@
 package com;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 
 public class Time {
     public static void main(String[] args) {
         System.out.println(Instant.now());
+
         LocalTime now = LocalTime.now();
-        System.out.println(now);
         LocalTime of = LocalTime.of(0, 0, 0);
         Duration between = Duration.between(of, now);
         System.out.println(between.toMinutes());
-        System.out.println(Math.ceil(2));
-        int a = (int) 3.234D;
-        System.out.println(a);
-        LocalDate now1 = LocalDate.now();
+
+        LocalDateTime nowDateTime = LocalDateTime.now();
+        LocalDateTime ofDateTime = LocalDateTime.of(2018, 7, 20, 16, 30, 10);
+        Duration betweenDateTime = Duration.between(ofDateTime, nowDateTime);
+        System.out.println(betweenDateTime.toDays());
+
+        LocalDate nowDate = LocalDate.now();
+        LocalDate ofDate = LocalDate.of(2018, 6, 21);
+        long days = ChronoUnit.DAYS.between(ofDate, nowDate);
+        System.out.println(days);
     }
 }
