@@ -1,4 +1,4 @@
-package com;
+package com.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -17,14 +17,17 @@ public class HelloServer {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap b = new ServerBootstrap();
-            b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).handler(new SimpleServerHandler())
+            final HelloServerChildInHandlerWithoutAdapter helloServerChildInHandlerWithoutAdapter = new HelloServerChildInHandlerWithoutAdapter();
+            b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).handler(new SimpleServerInboundHandler())
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
                             // 注册handler
-                            ch.pipeline().addLast(new HelloServerInHandler());
+                            ch.pipeline().addLast(new HelloServerChildInHandler(), new HelloServerChildOutHandler(), helloServerChildInHandlerWithoutAdapter);
                         }
-                    }).option(ChannelOption.SO_BACKLOG, 128).childOption(ChannelOption.SO_KEEPALIVE, true);
+                    })
+                    .option(ChannelOption.SO_BACKLOG, 128)
+                    .childOption(ChannelOption.SO_KEEPALIVE, true);
 
             ChannelFuture f = b.bind(port).sync();
 
