@@ -21,10 +21,16 @@
                     <execution>
                         <phase>compile</phase>
                         <goals>
-                            <goal>sayhi</goal>
+                            <goal>sayHi</goal>
+                            <goal>sayHey</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <configKey>configValue</configKey>
+                    <config>value</config>
+                    <configKeyWithDefault>configValueButNotDefault</configKeyWithDefault>
+                </configuration>
             </plugin>
         </plugins>
     </build>
