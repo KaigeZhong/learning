@@ -29,7 +29,7 @@ public class GreetingMojo extends AbstractMojo {
         getLog().info(
                 "######################################################" +
                         "configKey: " + configKey + ", " +
-                        "config: " + config +
+                        "config: " + config + ", " +
                         "configKeyWithDefault: " + configKeyWithDefault + ", " +
                         "######################################################");
     }

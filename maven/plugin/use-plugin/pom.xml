@@ -19,7 +19,7 @@
                 <version>${project.version}</version>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>sayHi</goal>
                             <goal>sayHey</goal>
