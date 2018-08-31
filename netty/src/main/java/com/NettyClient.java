@@ -1,0 +1,47 @@
+package com;
+
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
+
+public class NettyClient {
+  public static void main(String[] args) {
+    EventLoopGroup group = new NioEventLoopGroup();
+    try {
+      Bootstrap b = new Bootstrap();
+      b.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
+        .handler(new ChannelInitializer<SocketChannel>() {
+          @Override
+          public void initChannel(SocketChannel ch) throws Exception {
+            ch.pipeline().addLast(
+//              //new LoggingHandler(LogLevel.INFO),
+              new EchoClientHandler(32));
+          }
+        });
+
+      // Start the client.
+      ChannelFuture f = b.connect("127.0.0.1", 8888).sync();
+
+      // Wait until the connection is closed.
+      f.channel().closeFuture().sync();
+    } catch (Exception e) {
+
+    } finally {
+      // Shut down the event loop to terminate all threads.
+      group.shutdownGracefully();
+    }
+  }
+
+  public static class EchoClientHandler extends ChannelInboundHandlerAdapter {
+    public EchoClientHandler(int p0) {
+
+    }
+  }
+}
