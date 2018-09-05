@@ -9,6 +9,9 @@ DispatcherServlet会在onRefresh()创建tomcat的时候在后台线程中实例�
  */
 @RestController
 public class SampleCtrl {
+  public SampleCtrl() {
+    System.out.println();
+  }
   @RequestMapping("/")
   String home() {
     return "Hello World!";
