@@ -9,6 +9,8 @@ public class ConfigClient {
 
     private String foo;
     private String testKey;
+    private String bootKey;
+    private String customKey;
 
     public static void main(String[] args) {
         SpringApplication.run(ConfigClient.class, args);
@@ -22,5 +24,15 @@ public class ConfigClient {
     @Value("${testKey}")
     public void setTestKey(String testKey) {
         this.testKey = testKey;
+    }
+
+    @Value("${bootKey}")
+    public void setBootKey(String bootKey) {
+        this.bootKey = bootKey;
+    }
+
+    @Value("${customKey}")
+    public void setCustomKey(String customKey) {
+        this.customKey = customKey;
     }
 }
