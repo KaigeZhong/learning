@@ -1,3 +1,5 @@
 foo: localDefaultValue
 testKey: testDefaultValue
 customKey: customDefaultValue
+server:
+  port: 8088
