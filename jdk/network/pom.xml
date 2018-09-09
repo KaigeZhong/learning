@@ -6,9 +6,15 @@
 
     <parent>
         <groupId>jdk</groupId>
-        <artifactId>network</artifactId>
+        <artifactId>jdk</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>server</artifactId>
+    <artifactId>network</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>server</module>
+        <module>client</module>
+    </modules>
 
 </project>
