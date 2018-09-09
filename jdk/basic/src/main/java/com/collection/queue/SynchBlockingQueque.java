@@ -2,7 +2,7 @@ package com.collection.queue;
 
 import java.util.concurrent.SynchronousQueue;
 
-public class SynchQueque {
+public class SynchBlockingQueque {
   public final static SynchronousQueue<String> QUEUE = new SynchronousQueue<>();
 
   public static void main(String[] args) throws Exception {
