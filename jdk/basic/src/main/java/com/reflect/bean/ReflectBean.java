@@ -1,4 +1,4 @@
-package com.bean;
+package com.reflect.bean;
 
 public class ReflectBean {
     private String name;

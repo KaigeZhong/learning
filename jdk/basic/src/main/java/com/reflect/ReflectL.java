@@ -1,6 +1,7 @@
-package com;
+package com.reflect;
 
-import com.bean.ReflectBean;
+
+import com.reflect.bean.ReflectBean;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
