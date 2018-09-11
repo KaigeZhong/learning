@@ -14,12 +14,12 @@
             <artifactId>tomcat-embed-core</artifactId>
             <version>8.5.32</version>
             <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>tomcat-annotations-api</artifactId>
-                    <groupId>org.apache.tomcat</groupId>
-                </exclusion>
-            </exclusions>
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<artifactId>tomcat-annotations-api</artifactId>-->
+                    <!--<groupId>org.apache.tomcat</groupId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
