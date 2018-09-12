@@ -2,6 +2,8 @@ package com.web;
 
 import com.web.bean.Body;
 import com.web.bean.Non;
+import com.web.bean.Pojo;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,10 +41,21 @@ public class SampleCtrl {
   String user(@RequestBody Body body) {
     return body.getId() + body.getName();
   }
+
   //会采用ServletModelAttributeMethodProcessor进行请求参数解析
   @RequestMapping("/non")
   String non(Non non) {
     return non.getId() + non.getName();
+  }
+  //会采用RequestParamMethodArgumentResolver进行请求参数解析
+  @RequestMapping("/non/general")
+  String general(String name) {
+    return name;
+  }
+  //会采用ServletModelAttributeMethodProcessor进行请求参数解析
+  @RequestMapping("/modelattr")
+  String modelAttr(@ModelAttribute Pojo pojo) {
+    return pojo.getId() + pojo.getName();
   }
 
 }
