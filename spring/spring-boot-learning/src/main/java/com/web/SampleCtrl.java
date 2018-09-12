@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /*
-DispatcherServlet会在onRefresh()创建tomcat的时候在后台线程中实例化并注册到tomcat
+DispatcherServlet会在onRefresh()创建tomcat的时候在后台线程中实例化并注册到tomcat,
 而DispatcherServlet的handlerMappings（例如RequestMappingHandlerMapping
 ）则会在后面的finishBeanFactoryInitialization(beanFactory)主线程中被实例化。
  */
@@ -20,6 +20,17 @@ public class SampleCtrl {
   public SampleCtrl() {
     System.out.println();
   }
+
+  /**
+   * 1. dispatcher -> handlerMapping 找到HandlerExecutionChain(即interceptors + handler,
+   * handler就是我们ctrl中某个具体的方法)
+   * 2. 执行HandlerExecutionChain.applyPreHandle
+   * 3. adapter执行handler。
+   * 4. 执行HandlerExecutionChain.applyPostHandle
+   * 5. 执行HandlerExecutionChain..triggerAfterCompletion
+   *
+   * 参数的解析：根据不同的参数注解找到对应的HandlerMethodArgumentResolver进行解析, 部分解析器还会调用HttpMessageConverter转换器
+   */
 
   @RequestMapping("/test")
   String test() {
