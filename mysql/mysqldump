@@ -3,3 +3,5 @@
 #-h 是数据库的地址，如果没有此项表明是备份本地的数据库；
 #yourdbname 要备份的数据库名称；
 mysqldump -uyouruser -pyourpw -h yourdbhost  yourdbname > back.sql
+#将dump的数据插入到目标数据库
+cat back.sql | mysql -uroot -p111111 --host=localhost -C adt
