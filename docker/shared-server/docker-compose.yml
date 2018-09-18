@@ -1,0 +1,73 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - 3306:3306
+    command:
+      - --server-id=184054
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --binlog-row-image=full
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpw
+    volumes:
+      - "/mnt/docker-volumes/mysql:/var/lib/mysql"
+    networks:
+      - xc_rtb_net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    container_name: phpmyadmin
+    ports:
+      - 90:80
+    environment:
+      - PMA_HOST=mysql
+    networks:
+      - xc_rtb_net
+
+  zookeeper:
+    image: zookeeper:3.4
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+    expose:
+      - "2181"
+    networks:
+      - xc_rtb_net
+
+  kafka:
+    image: debezium/kafka:0.7
+    container_name: kafka
+    ports:
+      - 9092:9092
+    depends_on:
+      - zookeeper
+    environment:
+      - ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_NUM_PARTITIONS=1
+    volumes:
+      - "/mnt/docker-volumes/kafka/data:/kafka/data"
+      - "/mnt/docker-volumes/kafka/logs:/kafka/logs"
+    networks:
+      - xc_rtb_net
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    volumes:
+      - "/mnt/docker-volumes/redis:/data"
+    ports:
+      - "6379:6379"
+    networks:
+      - xc_rtb_net
+
+networks:
+  xc_rtb_net:
+    driver: bridge
