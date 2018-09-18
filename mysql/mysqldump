@@ -1,0 +1,1 @@
+mysqldump -uyouruser -pyourpw -h yourdbhost  youdbname > back.sql
