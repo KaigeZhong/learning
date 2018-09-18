@@ -1,1 +1,5 @@
-mysqldump -uyouruser -pyourpw -h yourdbhost  youdbname > back.sql
+#-u 是数据库的用户名，后面紧跟着用户名backup；
+#-p 是数据库的密码，后面同样紧跟着密码，注意是-p和密码之间不能有空格；
+#-h 是数据库的地址，如果没有此项表明是备份本地的数据库；
+#yourdbname 要备份的数据库名称；
+mysqldump -uyouruser -pyourpw -h yourdbhost  yourdbname > back.sql
