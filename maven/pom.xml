@@ -14,6 +14,7 @@
         <module>resource</module>
         <module>multi-env</module>
         <module>docker-parent</module>
+        <module>executable-jar</module>
     </modules>
 
 
