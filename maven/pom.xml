@@ -13,6 +13,7 @@
         <module>profile</module>
         <module>resource</module>
         <module>multi-env</module>
+        <module>docker-parent</module>
     </modules>
 
 

@@ -15,6 +15,20 @@
         <module>custom-maven-plugin</module>
         <module>use-plugin</module>
     </modules>
+    <!--
+    1. Maven is based around the central concept of a build lifecycle.
+        There are three built-in build lifecycles: default, clean and site.
+        The default lifecycle handles your project deployment,
+        the clean lifecycle handles project cleaning,
+        while the site lifecycle handles the creation of your project's site documentation.
+    2. A Build Lifecycle is Made Up of Phases
+        Each of these build lifecycles is defined by a different list of build phases, wherein a build phase represents a stage in the lifecycle.
+        These phases (plus the other lifecycle phases not shown here) are executed sequentially
+    3. A Phase is Made Up of Plugin Goals
+        However, even though a build phase is responsible for a specific step in the build lifecycle, the manner in which it carries out those responsibilities may vary. And this is done by declaring the plugin goals bound to those build phases.
+        A plugin goal represents a specific task, It may be bound to zero or more build phases. A goal not bound to any build phase could be executed outside of the build lifecycle by direct invocation. if a goal is bound to one or more build phases, that goal will be called in all those phases.
+        a build phase can also have zero or more goals bound to it. If a build phase has no goals bound to it, that build phase will not execute. But if it has one or more goals bound to it, it will execute all those goals
 
+    -->
 
 </project>

@@ -11,6 +11,7 @@
 
     <artifactId>profile</artifactId>
 
+    <!--mvn clean install -p dev-->
     <profiles>
         <profile>
             <id>dev</id>
