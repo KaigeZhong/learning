@@ -1,21 +1,19 @@
-package com;
+package com.mybatis.xml;
 
-import com.dao.CityDao;
-import com.dao.DualDao;
+import com.mybatis.xml.dao.CityDao;
+import com.mybatis.xml.dao.DualDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-/**
- * docker run --rm -p 8080:8080 --name mybatis --network docker_spring_third -d spring-third/mybatis:1.0-SNAPSHOT
- */
 @SpringBootApplication
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }
+
     @Autowired
     DualDao dualDao;
     @Autowired
@@ -24,10 +22,10 @@ public class App {
     @Bean
     CommandLineRunner sampleCommandLineRunner() {
         return (args) -> {
-            System.out.println("#########################mybatis annotation test start############################");
+            System.out.println("#########################mybatis xml test start############################");
             System.out.println(dualDao.test());
             System.out.println(cityDao.findByState("CA"));
-            System.out.println("#########################mybatis annotation test end############################");
+            System.out.println("#########################mybatis xml test end############################");
         };
     }
 }

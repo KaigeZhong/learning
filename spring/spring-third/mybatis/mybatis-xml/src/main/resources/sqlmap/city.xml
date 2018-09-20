@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.xml.dao.CityDao">
+
+    <sql id="city">
+         id, c_name, state, country
+	</sql>
+
+    <select id="findByState" parameterType="java.lang.String" resultType="com.mybatis.xml.bean.City">
+        select
+          <include refid="city"/>
+        from
+          city
+        where
+          state = #{state}
+    </select>
+
+</mapper>
