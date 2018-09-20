@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface CityDao {
 
-    @Select("SELECT id, name, state, country FROM city WHERE state = #{state}")
+    @Select("SELECT id, c_name, state, country FROM city WHERE state = #{state}")
     City findByState(String state);
 }

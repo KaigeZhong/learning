@@ -1,7 +1,7 @@
 package com;
 
 import com.dao.CityDao;
-import com.dao.TestDao;
+import com.dao.DualDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +17,7 @@ public class App {
         SpringApplication.run(App.class, args);
     }
     @Autowired
-    TestDao testDao;
+    DualDao dualDao;
     @Autowired
     CityDao cityDao;
 
@@ -25,7 +25,7 @@ public class App {
     CommandLineRunner sampleCommandLineRunner() {
         return (args) -> {
             System.out.println("#########################mybatis test start############################");
-            System.out.println(testDao.test());
+            System.out.println(dualDao.test());
             System.out.println(cityDao.findByState("CA"));
             System.out.println("#########################mybatis test end############################");
         };

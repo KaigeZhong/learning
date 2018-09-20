@@ -7,7 +7,7 @@ public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private String name;
+    private String CName;
     private String state;
     private String country;
 
@@ -19,12 +19,12 @@ public class City implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getCName() {
+        return this.CName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCName(String CName) {
+        this.CName = CName;
     }
 
     public String getState() {
@@ -45,7 +45,7 @@ public class City implements Serializable {
 
     @Override
     public String toString() {
-        return getId() + "," + getName() + "," + getState() + "," + getCountry();
+        return getId() + "," + getCName() + "," + getState() + "," + getCountry();
     }
 
 }
