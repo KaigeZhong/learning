@@ -1,0 +1,24 @@
+version: "3"
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - 3306:3306
+    command:
+      - --server-id=184054
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --binlog-row-image=full
+    environment:
+      - MYSQL_ROOT_PASSWORD=mybatis
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpw
+    networks:
+      - spring_third
+
+networks:
+  spring_third:
+    driver: bridge
