@@ -25,6 +25,7 @@ public class App {
             System.out.println("#########################mybatis xml test start############################");
             System.out.println(dualDao.test());
             System.out.println(cityDao.findByState("CA"));
+            System.out.println(cityDao.findbyStateFuzzy("C"));
             System.out.println("#########################mybatis xml test end############################");
         };
     }

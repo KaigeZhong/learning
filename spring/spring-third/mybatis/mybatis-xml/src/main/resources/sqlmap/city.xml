@@ -16,5 +16,18 @@
         where
           state = #{state}
     </select>
+    <select id="findbyStateFuzzy" parameterType="java.lang.String" resultType="com.mybatis.xml.bean.City">
+        select
+        <include refid="city"/>
+        from
+        city
+        where
+        <!--
+        1. like %keyword    索引失效，使用全表扫描。但可以通过翻转函数+like前模糊查询+建立翻转函数索引=走翻转函数索引，不走全表扫描。
+        2. like keyword%    索引有效。
+        3. like %keyword% 索引失效，也无法使用反向索引-->
+        <!-- state like "%"#{state}"%"-->
+        state like #{state}"%"
+    </select>
 
 </mapper>
