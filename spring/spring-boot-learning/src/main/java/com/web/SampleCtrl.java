@@ -41,7 +41,7 @@ public class SampleCtrl {
     }
 
     //会采用PathVariableMethodArgumentResolver进行路径解析
-    @RequestMapping("/{name}")
+    @RequestMapping("/path/{name}")
     String home(@PathVariable("name") String name) {
         return "Hello World! " + name;
     }

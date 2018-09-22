@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>bean-validation</groupId>
+    <artifactId>bean-validation</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <!--validation-api 不在java se中，而是在java ee中，所以手动引入该包。因为hibernate-validator已经包含了，不再重复引入-->
+        <!--<dependency>-->
+            <!--<groupId>javax.validation</groupId>-->
+            <!--<artifactId>validation-api</artifactId>-->
+            <!--<version>2.0.1.Final</version>-->
+        <!--</dependency>-->
+        <!--validation 依赖el; el-api也不在java se中，而是在java ee中，因为glassfish中已经包含了，故不再重复引入-->
+        <!--<dependency>-->
+            <!--<groupId>javax.el</groupId>-->
+            <!--<artifactId>javax.el-api</artifactId>-->
+            <!--<version>3.0.0</version>-->
+        <!--</dependency>-->
+
+
+        <!--因为javax.validation只定义了标准，并没有实现，所以需要第三方的实现包-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.11.Final</version>
+        </dependency>
+        <!--javax 只定义了ExpressionFactory抽象类，并没有实现，所以引入glassfish的el实现-->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.1-b09</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
