@@ -4,19 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>maven</groupId>
-    <artifactId>maven</artifactId>
+    <parent>
+        <groupId>spring-learning</groupId>
+        <artifactId>spring-learning</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>spring-boot-learning</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>plugin</module>
-        <module>profile</module>
-        <module>resource</module>
-        <module>multi-env</module>
-        <module>docker-parent</module>
-        <module>jar</module>
-        <module>java-version</module>
-    </modules>
 
+    <modules>
+        <module>spring-boot-learning-web</module>
+        <module>spring-boot-learning-basic</module>
+    </modules>
 
 </project>

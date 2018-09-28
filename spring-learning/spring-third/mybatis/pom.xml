@@ -2,20 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>spring-learning</groupId>
+        <artifactId>spring-third</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>maven</groupId>
-    <artifactId>maven</artifactId>
+    <artifactId>mybatis</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+
     <modules>
-        <module>plugin</module>
-        <module>profile</module>
-        <module>resource</module>
-        <module>multi-env</module>
-        <module>docker-parent</module>
-        <module>jar</module>
-        <module>java-version</module>
+        <module>mybatis-annotation</module>
+        <module>mybatis-xml</module>
     </modules>
 
 
