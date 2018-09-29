@@ -31,6 +31,10 @@ public class ConfigClient implements ApplicationContextAware {
     }
     @RequestMapping("/{key}")
     public String value(@PathVariable String key) {
+        /**
+         * bootstrap.yml存在父context的Environment里
+         * 远程配置，application-dev.yml, application.yml和bootstrap.yml存在子context的environment，
+         */
         String property = context.getEnvironment().getProperty(key);
         String propertyFromParent = context.getParent().getEnvironment().getProperty(key);
         return property + ", " + propertyFromParent;

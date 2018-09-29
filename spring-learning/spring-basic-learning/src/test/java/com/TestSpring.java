@@ -145,6 +145,7 @@ public class TestSpring {
             System.out.println(childBeanFromParent);
         }
 
+        //父context的environment会被merge进子context的environment，意味着父properties属性会同时存在于子context和父context
         //get properties
         ConfigurableEnvironment childContextEnvironment = childContext.getEnvironment();
         Environment parentContextEnvironment = parentContext.getEnvironment();
