@@ -1,0 +1,17 @@
+<configuration>
+    <!--用来指定hdfs的老大，ns为固定属性名，表示两个namenode-->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>cluter1</value>
+    </property>
+    <!--执行zookeeper地址-->
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>zk1,zk2,zk3</value>
+    </property>
+    <!-- 指定hadoop运行时产生文件的存储路径 -->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/tmp</value>
+    </property>
+</configuration>
