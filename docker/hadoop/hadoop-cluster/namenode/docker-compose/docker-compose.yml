@@ -8,7 +8,6 @@ services:
       - JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
       - CLUSTER_NAME=cluter1
       - CLUSTERS=cluster1:hadoop_hdfs_namenode1,hadoop_hdfs_namenode2;cluster2:hadoop_hdfs_namenode3,hadoop_hdfs_namenode4
-      - HADOOP_DATA_DIR=$HADOOP_HOME/data
     networks:
       - net_custom
 
@@ -20,7 +19,6 @@ services:
       - JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
       - CLUSTER_NAME=cluter1
       - CLUSTERS=cluster1:hadoop_hdfs_namenode1,hadoop_hdfs_namenode2;cluster2:hadoop_hdfs_namenode3,hadoop_hdfs_namenode4
-      - HADOOP_DATA_DIR=$HADOOP_HOME/data
     networks:
       - net_custom
 
@@ -32,7 +30,6 @@ services:
       - JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
       - CLUSTER_NAME=cluter2
       - CLUSTERS=cluster1:hadoop_hdfs_namenode1,hadoop_hdfs_namenode2;cluster2:hadoop_hdfs_namenode3,hadoop_hdfs_namenode4
-      - HADOOP_DATA_DIR=$HADOOP_HOME/data
     networks:
       - net_custom
 
@@ -44,7 +41,6 @@ services:
       - JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
       - CLUSTER_NAME=cluter2
       - CLUSTERS=cluster1:hadoop_hdfs_namenode1,hadoop_hdfs_namenode2;cluster2:hadoop_hdfs_namenode3,hadoop_hdfs_namenode4
-      - HADOOP_DATA_DIR=$HADOOP_HOME/data
     networks:
       - net_custom
 

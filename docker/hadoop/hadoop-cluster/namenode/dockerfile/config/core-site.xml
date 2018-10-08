@@ -2,7 +2,7 @@
     <!--用来指定hdfs的老大，ns为固定属性名，表示两个namenode-->
     <property>
         <name>fs.defaultFS</name>
-        <value>cluter1</value>
+        <value>hdfs://cluter1</value>
     </property>
     <!--执行zookeeper地址-->
     <property>

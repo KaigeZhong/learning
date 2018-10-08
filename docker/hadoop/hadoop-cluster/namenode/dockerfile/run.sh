@@ -1,17 +1,16 @@
 #!/bin/bash
 
 #core-site.xml
-sed -i -e '/fs\.defaultFS/!b;n;c\        <value>'"$CLUSTER_NAME"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
+sed -i -e '/fs\.defaultFS/!b;n;c\        <value>hdfs://'"$CLUSTER_NAME"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
 sed -i -e '/hadoop\.tmp\.dir/!b;n;c\        <value>'"$HADOOP_DATA_DIR/tmp"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
 sed -i -e '/ha\.zookeeper\.quorum/!b;n;c\        <value>'"$ZOOKEEPER_CONNS"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
 
 #hdfs-site.xml
+sed -i -e '/dfs\.journalnode\.edits\.dir/!b;n;c\        <value>'$HADOOP_DATA_DIR/journal'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+sed -i -e '/dfs\.namenode\.name\.dir/!b;n;c\        <value>file://'$HADOOP_DATA_DIR/namenode'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+sed -i -e '/dfs\.datanode\.data\.dir/!b;n;c\        <value>file://'$HADOOP_DATA_DIR/datanode'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 
 sed -i -e '/dfs\.namenode\.shared\.edits\.dir/!b;n;c\        <value>qjournal://'$JOURNAL_CONNS'/'$CLUSTER_NAME'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-sed -i -e '/dfs\.journalnode\.edits\.dir/!b;n;c\        <value>'$HADOOP_DATA_DIR/journal'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-sed -i -e '/dfs\.namenode\.name\.dir/!b;n;c\        <value>'$HADOOP_DATA_DIR/namenode'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-sed -i -e '/dfs\.datanode\.data\.dir/!b;n;c\        <value>'$HADOOP_DATA_DIR/datanode'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-
 
 splitStrToArray(){
 #shell函数定义的变量也是global的，其作用域从 函数被调用执行变量的地方 开始，到shell或结束或者显示删除为止。函数定义的变量可以是local的，其作用域局限于函数内部。但是函数的参数是local的。
@@ -29,6 +28,7 @@ for cluster_str in ${clusters_arr[*]}
 do 
     cluster_arr=(`splitStrToArray "$cluster_str" ":"`)
     cluster=${cluster_arr[0]} 
+    ##字符拼接成cluster1,cluster2,...
     if [ ! $nameservices ]
     then
         nameservices=$cluster
@@ -78,5 +78,16 @@ do
         </property>'\
         $HADOOP_HOME/etc/hadoop/hdfs-site.xml
     done
+    
+    sed -i -e '/<\/configuration>/ i\
+    <property>\
+        <name>dfs.ha.automatic-failover.enabled.'$s'</name>\
+        <value>true</value>\
+    </property>\
+    <property>\
+        <name>dfs.client.failover.proxy.provider.'$s'</name>\
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>\
+    </property>'\
+    $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 done
 /bin/bash
