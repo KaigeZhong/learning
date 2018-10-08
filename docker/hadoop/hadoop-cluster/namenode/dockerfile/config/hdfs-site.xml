@@ -1,5 +1,6 @@
 <configuration>
     <property>
+    <!-- hadoop-rokid1 JournalNode配置 两者配置不一样 每一个namespace下 只存其一-->
         <name>dfs.namenode.shared.edits.dir</name>
         <value>qjournal://hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485/cluster1</value>
     </property>
