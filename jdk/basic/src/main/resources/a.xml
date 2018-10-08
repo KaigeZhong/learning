@@ -1,12 +1,12 @@
 <configuration>
     <property>
         <name>dfs.namenode.shared.edits.dir</name>
-        <value>qjournal://hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485/cluster1</value>
+        <value>qjournal://hadoop04:8485;hadoop05:8485;hadoop06:8485/cluster1</value>
     </property>
     <!--指定JournalNode存放数据的位置-->
     <property>
         <name>dfs.journalnode.edits.dir</name>
-        <value>/opt/hadoop/data/journal</value>
+        <value>/usr/soft/hadoop-2.7.1/journal</value>
     </property>
     <!--开启namenode故障时自动切换-->
     <property>
@@ -30,10 +30,10 @@
     </property>
 
     <!--配置namenode数据存放的位置,可以不配置，如果不配置，默认用的是core-site.xml里配置的hadoop.tmp.dir的路径-->
-    <property>
-        <name>dfs.namenode.name.dir</name>
-        <value>file:///usr/soft/hadoop-2.7.1/tmp/namenode</value>
-    </property>
+    <!--<property>-->
+        <!--<name>dfs.namenode.name.dir</name>-->
+        <!--<value>file:///usr/soft/hadoop-2.7.1/tmp/namenode</value>-->
+    <!--</property>-->
 
     <!--配置block副本数量-->
     <property>
@@ -42,11 +42,10 @@
     </property>
 
     <!--配置datanode数据存放的位置,可以不配置，如果不配置，默认用的是core-site.xml里配置的hadoop.tmp.dir的路径-->
-    <property>-->
-        <name>dfs.datanode.data.dir</name>
-        <value>file:///usr/soft/hadoop-2.7.1/tmp/datanode</value>
-    </property>-->
-
+    <!--<property>-->
+        <!--<name>dfs.datanode.data.dir</name>-->
+        <!--<value>file:///usr/soft/hadoop-2.7.1/tmp/datanode</value>-->
+    <!--</property>-->
 
 
 </configuration>

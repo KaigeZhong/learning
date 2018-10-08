@@ -23,6 +23,14 @@ RUN wget -q -O - http://mirrors.shu.edu.cn/apache/hadoop/common/stable/hadoop-${
 #在hadoop-env.sh会读取JAVA_HOME环境变量
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
+COPY config/ $HADOOP_HOME/etc/hadoop/
+#在run.sh中配置core-site.xml和hdfs-site.xml中会使用到
+ENV ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+ENV JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
+ENV HADOOP_DATA_DIR=$HADOOP_HOME/data
+ENV CLUSTER_NAME=cluter1
+ENV CLUSTERS="cluster1:namenode1,namenode2;cluster2:namenode3,namenode4"
+
 ADD ./run.sh /opt/run.sh
 RUN chmod 777 /opt/run.sh
-CMD ["/opt/run.sh"]
+CMD ["bin/sh", "-c", "/opt/run.sh"]

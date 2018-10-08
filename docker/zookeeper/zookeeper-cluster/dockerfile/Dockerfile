@@ -13,13 +13,14 @@ deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted unive
 
 RUN apt-get update && apt-get install -y openjdk-8-jdk
 ARG ZK_VERSION=3.4.12
-RUN apt-get install -y wget\
- && wget -q -O - http://mirrors.hust.edu.cn/apache/zookeeper/stable/zookeeper-${ZK_VERSION}.tar.gz | tar -xzf - -C /opt \
- && mv /opt/zookeeper-${ZK_VERSION} /opt/zookeeper \
- && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg
-ENV DATA_DIR=/tmp/zooke
+ENV ZK_HOME=/opt/zookeeper
+RUN apt-get install -y wget
+RUN wget -q -O - http://mirrors.hust.edu.cn/apache/zookeeper/stable/zookeeper-${ZK_VERSION}.tar.gz | tar -xzf - -C /opt \
+ && mv /opt/zookeeper-${ZK_VERSION} $ZK_HOME \
+ && cp /opt/zookeeper/conf/zoo_sample.cfg $ZK_HOME/conf/zoo.cfg
+ENV DATA_DIR=$ZK_HOME/data
 RUN mkdir -p $DATA_DIR \
- && sed -i -e "/^dataDir/c\dataDir=$DATA_DIR" /opt/zookeeper/conf/zoo.cfg
+ && sed -i -e "/^dataDir/c\dataDir=$DATA_DIR" $ZK_HOME/conf/zoo.cfg
 
 ADD ./run.sh /opt/run.sh
 RUN chmod 777 /opt/run.sh
