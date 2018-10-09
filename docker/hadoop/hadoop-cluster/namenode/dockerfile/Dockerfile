@@ -26,7 +26,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 COPY config/ $HADOOP_HOME/etc/hadoop/
 #在run.sh中配置core-site.xml和hdfs-site.xml中会使用到
 ENV ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
-ENV JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
+ENV JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
 ENV HADOOP_DATA_DIR=$HADOOP_HOME/data
 ENV CLUSTER_NAME=cluter1
 ENV CLUSTERS="cluster1:namenode1,namenode2;cluster2:namenode3,namenode4"

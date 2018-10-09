@@ -2,17 +2,17 @@ version: "3"
 services:
   journalnode1:
     image: hadoop_hdfs_journalnode_custom:latest
-    container_name: hadoop_hdfs_journalnode1
+    container_name: journalnode1
     networks:
       - net_custom
   journalnode2:
     image: hadoop_hdfs_journalnode_custom:latest
-    container_name: hadoop_hdfs_journalnode2
+    container_name: journalnode2
     networks:
       - net_custom
   journalnode3:
     image: hadoop_hdfs_journalnode_custom:latest
-    container_name: hadoop_hdfs_journalnode3
+    container_name: journalnode3
     networks:
       - net_custom
 

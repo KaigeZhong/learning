@@ -2,45 +2,58 @@ version: "3"
 services:
   namenode1:
     image: hadoop_hdfs_namenode_custom:latest
-    container_name: hadoop_hdfs_namenode1
+    container_name: namenode1
     environment:
       - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
-      - JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
+      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
       - CLUSTER_NAME=cluter1
-      - CLUSTERS=cluster1:hadoop_hdfs_namenode1,hadoop_hdfs_namenode2;cluster2:hadoop_hdfs_namenode3,hadoop_hdfs_namenode4
+      - CLUSTERS=cluster1:namenode1,namenode2;cluster2:namenode3,namenode4
+      # zkfc和namenode的格式化，在同一cluster的两台namenode上执行的指令是不同的，IS_FIRST用于区分两台namenode
+      - IS_FIRST=true
+    ports:
+      - 50071:50070
     networks:
       - net_custom
 
   namenode2:
     image: hadoop_hdfs_namenode_custom:latest
-    container_name: hadoop_hdfs_namenode2
+    container_name: namenode2
     environment:
       - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
-      - JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
+      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
       - CLUSTER_NAME=cluter1
-      - CLUSTERS=cluster1:hadoop_hdfs_namenode1,hadoop_hdfs_namenode2;cluster2:hadoop_hdfs_namenode3,hadoop_hdfs_namenode4
+      - CLUSTERS=cluster1:namenode1,namenode2;cluster2:namenode3,namenode4
+      - IS_FIRST=false
+    ports:
+      - 50072:50070
     networks:
       - net_custom
 
   namenode3:
     image: hadoop_hdfs_namenode_custom:latest
-    container_name: hadoop_hdfs_namenode3
+    container_name: namenode3
     environment:
       - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
-      - JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
+      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
       - CLUSTER_NAME=cluter2
-      - CLUSTERS=cluster1:hadoop_hdfs_namenode1,hadoop_hdfs_namenode2;cluster2:hadoop_hdfs_namenode3,hadoop_hdfs_namenode4
+      - CLUSTERS=cluster1:namenode1,namenode2;cluster2:namenode3,namenode4
+      - IS_FIRST=true
+    ports:
+      - 50073:50070
     networks:
       - net_custom
 
   namenode4:
     image: hadoop_hdfs_namenode_custom:latest
-    container_name: hadoop_hdfs_namenode4
+    container_name: namenode4
     environment:
       - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
-      - JOURNAL_CONNS=hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485
+      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
       - CLUSTER_NAME=cluter2
-      - CLUSTERS=cluster1:hadoop_hdfs_namenode1,hadoop_hdfs_namenode2;cluster2:hadoop_hdfs_namenode3,hadoop_hdfs_namenode4
+      - CLUSTERS=cluster1:namenode1,namenode2;cluster2:namenode3,namenode4
+      - IS_FIRST=false
+    ports:
+      - 50074:50070
     networks:
       - net_custom
 
