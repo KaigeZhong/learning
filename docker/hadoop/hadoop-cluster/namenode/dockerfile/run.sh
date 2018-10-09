@@ -95,11 +95,17 @@ done
 
 ######################################启动########################
 ##/bin/bash
-######如果想只配置，然后再手动去启动hadoop，可以注释掉下面所有的指令，然后放开上面的/bin/bash
+
+
+######如果想只配置,然后再手动去启动hadoop，可以注释掉下面所有的指令，然后放开上面的/bin/bash
+
+
+####一下代码只适用于当采用docker-compose自动启动
 
 #第一步，格式化zkfc。在一个cluster中,只会在一台namenode上执行
 if [ $IS_FIRST -a $IS_FIRST = true ] #shell中没有布尔，这里的true实际是字符串
 then
+    # 由于当采用
     for loop in 1 2 3 4 5
     do
         echo "$CLUSTER_NAME"" is_first->"$IS_FIRST""":""zkfc formatZK  ""loop:""$loop"
@@ -108,6 +114,7 @@ then
         then
             break
         fi
+        sleep 1s
     done
 fi
 #第二步，格式化namenode。在一个cluster中，在不同namenode上执行的命令不同
@@ -121,6 +128,7 @@ then
         then
             break
         fi
+        sleep 1s
     done
 else
     for loop in 1 2 3 4 5
@@ -131,31 +139,54 @@ else
         then
             break
         fi
+        sleep 1s
     done
 fi
 ##第三步, 启动namenode。后台启动采用hadoop-daemon.sh start namenode, 前台启动采用hdfs namenode.在这里我们采用后台启动
-#$HADOOP_HOME/sbin/hadoop-daemon.sh start namenode
-##第四步, 启动zkfc。在这里采用前台启动，应为docker需要一个前台进程。zkfc依赖namenode，会去调用namenode的rpc 9000端口。但其实第三步和第四步是可以颠倒顺序的，因为当zkfc找不到namenode时会每隔一秒去尝试。
-#$HADOOP_HOME/bin/hdfs zkfc
-
-#颠倒上面的第三步和第四步
-#第三步
-    for loop in 1 2 3 4 5
-    do
-        echo "$CLUSTER_NAME"":""start zkfc  ""loop:""$loop"
-        $HADOOP_HOME/sbin/hadoop-daemon.sh start zkfc
-        if [ $? == 0 ]
-        then
-            break
-        fi
-    done
-#第四步
     for loop in 1 2 3 4 5
     do
         echo "$CLUSTER_NAME"":""start namenode  ""loop:""$loop"
-        $HADOOP_HOME/bin/hdfs namenode
+        $HADOOP_HOME/sbin/hadoop-daemon.sh start namenode
         if [ $? == 0 ]
         then
             break
         fi
+        sleep 1s
     done
+##第四步, 启动zkfc。在这里采用前台启动，应为docker需要一个前台进程。zkfc依赖namenode，会去调用namenode的rpc 9000端口。但其实第三步和第四步是可以颠倒顺序的，因为当zkfc找不到namenode时会每隔一秒去尝试。
+    for loop in 1 2 3 4 5
+    do
+        echo "$CLUSTER_NAME"":""start zkfc  ""loop:""$loop"
+        $HADOOP_HOME/bin/hdfs zkfc
+        if [ $? == 0 ]
+        then
+            break
+        fi
+        sleep 1s
+    done
+
+
+
+#颠倒上面的第三步和第四步
+#第三步
+#    for loop in 1 2 3 4 5
+#    do
+#        echo "$CLUSTER_NAME"":""start zkfc  ""loop:""$loop"
+#        $HADOOP_HOME/sbin/hadoop-daemon.sh start zkfc
+#        if [ $? == 0 ]
+#        then
+#            break
+#        fi
+#        sleep 1s
+#    done
+#第四步
+#    for loop in 1 2 3 4 5
+#    do
+#        echo "$CLUSTER_NAME"":""start namenode  ""loop:""$loop"
+#        $HADOOP_HOME/bin/hdfs namenode
+#        if [ $? == 0 ]
+#        then
+#            break
+#        fi
+#        sleep 1s
+#    done
