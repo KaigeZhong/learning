@@ -3,12 +3,12 @@
 ##################################配置#########################
 
 #core-site.xml
-sed -i -e '/fs\.defaultFS/!b;n;c\        <value>hdfs://'"$CLUSTER_NAME"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
+sed -i -e '/fs\.defaultFS/!b;n;c\        <value>hdfs://'"$NAME_SERVICE"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
 sed -i -e '/hadoop\.tmp\.dir/!b;n;c\        <value>'"$HADOOP_DATA_DIR/tmp"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
 sed -i -e '/ha\.zookeeper\.quorum/!b;n;c\        <value>'"$ZOOKEEPER_CONNS"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
 
 #hdfs-site.xml
-sed -i -e '/dfs\.namenode\.shared\.edits\.dir/!b;n;c\        <value>qjournal://'$JOURNAL_CONNS'/'$CLUSTER_NAME'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+sed -i -e '/dfs\.namenode\.shared\.edits\.dir/!b;n;c\        <value>qjournal://'$JOURNAL_CONNS'/'$NAME_SERVICE'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 
 sed -i -e '/dfs\.journalnode\.edits\.dir/!b;n;c\        <value>'$HADOOP_DATA_DIR/journal'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 sed -i -e '/dfs\.namenode\.name\.dir/!b;n;c\        <value>file://'$HADOOP_DATA_DIR/namenode'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
@@ -25,41 +25,41 @@ splitStrToArray(){
     echo ${arr[*]}
 }
 
-clusters_arr=(`splitStrToArray "$CLUSTERS" ";"`)
-for cluster_str in ${clusters_arr[*]} 
+name_services_arr=(`splitStrToArray "$NAME_SERVICES" ";"`)
+for name_service_str in ${name_services_arr[*]} 
 do 
-    cluster_arr=(`splitStrToArray "$cluster_str" ":"`)
-    cluster=${cluster_arr[0]} 
-    ##字符拼接成cluster1,cluster2,...
-    if [ ! $nameservices ]
+    name_service_arr=(`splitStrToArray "$name_service_str" ":"`)
+    name_service=${name_service_arr[0]} 
+    ##字符拼接成name_service1,name_service2,...
+    if [ ! $nameservices_str ]
     then
-        nameservices=$cluster
+        nameservices_str=$name_service
     else
-        nameservices="$nameservices"",""$cluster"
+        nameservices_str="$nameservices_str"",""$name_service"
     fi
 done
 
-##cluster hdfs federation集群之间是需要相互知道的
+## hdfs federation nameservices集群之间是需要相互知道的
 sed -i -e '/<\/configuration>/ i\
-    <!--hdfs的nameservice为'$nameservices'-->\
+    <!--hdfs的nameservices为'$nameservices'-->\
     <property>\
         <name>dfs.nameservices</name>\
-        <value>'$nameservices'</value>\
+        <value>'$nameservices_str'</value>\
     </property>'\
     $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 
-for cluster_info_str in ${clusters_arr[*]} 
+for name_service_info_str in ${name_services_arr[*]} 
 do 
-    cluster_info_arr=(`splitStrToArray "$cluster_info_str" ":"`)
-    s=${cluster_info_arr[0]}
-    namenode_info_str=${cluster_info_arr[1]}
+    name_service_info_arr=(`splitStrToArray "$name_service_info_str" ":"`)
+    nameservice=${name_service_info_arr[0]}
+    namenode_info_str=${name_service_info_arr[1]}
     sed -i -e '/<\/configuration>/ i\
 \
 \
-    <!--配置'$s'-->\
-    <!--'$s'下有两个namenode,分别是nn1,nn2-->\
+    <!--配置'$nameservice'-->\
+    <!--'$nameservice'下有两个namenode,分别是nn1,nn2-->\
     <property>\
-        <name>dfs.ha.namenodes.'$s'</name>\
+        <name>dfs.ha.namenodes.'$nameservice'</name>\
         <value>'$namenode_info_str'</value>\
     </property>'\
     $HADOOP_HOME/etc/hadoop/hdfs-site.xml
@@ -69,14 +69,14 @@ do
     for nn in ${namenode_arr[*]}
     do
         sed -i -e '/<\/configuration>/ i\
-        <!--'$s' '${nn}'的RPC通信地址-->\
+        <!--'$nameservice' '${nn}'的RPC通信地址-->\
         <property>\
-            <name>dfs.namenode.rpc-address.'$s'.'$nn'</name>\
+            <name>dfs.namenode.rpc-address.'$nameservice'.'$nn'</name>\
             <value>'${nn}':9000</value>\
         </property>\
-        <!--'$s' '${nn}'的http通信地址-->\
+        <!--'$nameservice' '${nn}'的http通信地址-->\
         <property>\
-            <name>dfs.namenode.http-address.'$s'.'$nn'</name>\
+            <name>dfs.namenode.http-address.'$nameservice'.'$nn'</name>\
             <value>'$nn':50070</value>\
         </property>'\
         $HADOOP_HOME/etc/hadoop/hdfs-site.xml
@@ -84,11 +84,11 @@ do
     
     sed -i -e '/<\/configuration>/ i\
     <property>\
-        <name>dfs.ha.automatic-failover.enabled.'$s'</name>\
+        <name>dfs.ha.automatic-failover.enabled.'$nameservice'</name>\
         <value>true</value>\
     </property>\
     <property>\
-        <name>dfs.client.failover.proxy.provider.'$s'</name>\
+        <name>dfs.client.failover.proxy.provider.'$nameservice'</name>\
         <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>\
     </property>'\
     $HADOOP_HOME/etc/hadoop/hdfs-site.xml
@@ -104,12 +104,12 @@ done
 ####一下代码只适用于当采用docker-compose自动启动
 
 #第一步，格式化zkfc。在一个cluster中,只会在一台namenode上执行
-if [ $IS_FIRST -a $IS_FIRST = true ] #shell中没有布尔，这里的true实际是字符串
+if [ $NAMENODE_FIRST_TAG -a $NAMENODE_FIRST_TAG = true ] #shell中没有布尔，这里的true实际是字符串
 then
     # 由于当采用
     for loop in 1 2 3 4 5
     do
-        echo "$CLUSTER_NAME"" is_first->"$IS_FIRST""":""zkfc formatZK  ""loop:""$loop"
+        echo "$CLUSTER_NAME"" is_first->"$NAMENODE_FIRST_TAG""":""zkfc formatZK  ""loop:""$loop"
         $HADOOP_HOME/bin/hdfs zkfc -formatZK
         if [ $? == 0 ]
         then
@@ -119,12 +119,13 @@ then
     done
 fi
 #第二步，格式化namenode。在一个cluster中，在不同namenode上执行的命令不同
-if [ $IS_FIRST -a $IS_FIRST = true ]
+if [ $NAMENODE_FIRST_TAG -a $NAMENODE_FIRST_TAG = true ]
 then
     for loop in 1 2 3 4 5
     do
-        echo "$CLUSTER_NAME"" is_first->"$IS_FIRST""":""namenode format  ""loop:""$loop"
-        $HADOOP_HOME/bin/hdfs namenode -format
+        echo "$CLUSTER_NAME"" is_first->"$NAMENODE_FIRST_TAG""":""namenode format  ""loop:""$loop"
+        #HDFS Federation下所有的nameservices的cluster id必须是相同的
+        $HADOOP_HOME/bin/hdfs namenode -format -clusterId $CLUSTER_ID
         if [ $? == 0 ]
         then
             break
@@ -134,7 +135,7 @@ then
 else
     for loop in 1 2 3 4 5
     do
-        echo "$CLUSTER_NAME"" is_first->"$IS_FIRST""":""namenode bootstrapStandby  ""loop:""$loop"
+        echo "$CLUSTER_NAME"" is_first->"$NAMENODE_FIRST_TAG""":""namenode bootstrapStandby  ""loop:""$loop"
         $HADOOP_HOME/bin/hdfs namenode -bootstrapStandby
         if [ $? == 0 ]
         then

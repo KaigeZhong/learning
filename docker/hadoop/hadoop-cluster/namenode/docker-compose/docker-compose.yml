@@ -6,10 +6,10 @@ services:
     environment:
       - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
       - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
-      - CLUSTER_NAME=cluter1
-      - CLUSTERS=cluster1:namenode1,namenode2;cluster2:namenode3,namenode4
-      # zkfc和namenode的格式化，在同一cluster的两台namenode上执行的指令是不同的，IS_FIRST用于区分两台namenode
-      - IS_FIRST=true
+      - NAME_SERVICE=nameservice1
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+      # zkfc和namenode的格式化，在同一cluster的两台namenode上执行的指令是不同的，NAMENODE_FIRST_TAG用于区分两台namenode
+      - NAMENODE_FIRST_TAG=true
     ports:
       - 50071:50070
     networks:
@@ -21,9 +21,9 @@ services:
     environment:
       - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
       - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
-      - CLUSTER_NAME=cluter1
-      - CLUSTERS=cluster1:namenode1,namenode2;cluster2:namenode3,namenode4
-      - IS_FIRST=false
+      - NAME_SERVICE=nameservice1
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+      - NAMENODE_FIRST_TAG=false
     ports:
       - 50072:50070
     networks:
@@ -35,9 +35,9 @@ services:
     environment:
       - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
       - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
-      - CLUSTER_NAME=cluter2
-      - CLUSTERS=cluster1:namenode1,namenode2;cluster2:namenode3,namenode4
-      - IS_FIRST=true
+      - NAME_SERVICE=nameservice2
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+      - NAMENODE_FIRST_TAG=true
     ports:
       - 50073:50070
     networks:
@@ -49,9 +49,9 @@ services:
     environment:
       - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
       - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
-      - CLUSTER_NAME=cluter2
-      - CLUSTERS=cluster1:namenode1,namenode2;cluster2:namenode3,namenode4
-      - IS_FIRST=false
+      - NAME_SERVICE=nameservice2
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+      - NAMENODE_FIRST_TAG=false
     ports:
       - 50074:50070
     networks:
