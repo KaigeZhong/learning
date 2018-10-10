@@ -1,4 +1,15 @@
 <configuration>
+
+    <!--###################### 定制化配置 ############################3-->
+    <!-- hadoop-rokid1 JournalNode配置 两者配置不一样 每一个namespace下 只存其一-->
+    <property>
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485/cluster1</value>
+    </property>
+
+
+
+
     <!--###################### common confg #####################-->
     <!--指定JournalNode存放数据的位置-->
     <property>
@@ -35,11 +46,6 @@
     </property>
 
 
-    <!--###################### 定制化配置 ############################3-->
-    <!-- hadoop-rokid1 JournalNode配置 两者配置不一样 每一个namespace下 只存其一-->
-    <property>
-        <name>dfs.namenode.shared.edits.dir</name>
-        <value>qjournal://hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485/cluster1</value>
-    </property>
+
 
 </configuration>

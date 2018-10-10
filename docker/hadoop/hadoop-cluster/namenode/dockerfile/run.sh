@@ -8,11 +8,11 @@ sed -i -e '/hadoop\.tmp\.dir/!b;n;c\        <value>'"$HADOOP_DATA_DIR/tmp"'</val
 sed -i -e '/ha\.zookeeper\.quorum/!b;n;c\        <value>'"$ZOOKEEPER_CONNS"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
 
 #hdfs-site.xml
+sed -i -e '/dfs\.namenode\.shared\.edits\.dir/!b;n;c\        <value>qjournal://'$JOURNAL_CONNS'/'$CLUSTER_NAME'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+
 sed -i -e '/dfs\.journalnode\.edits\.dir/!b;n;c\        <value>'$HADOOP_DATA_DIR/journal'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 sed -i -e '/dfs\.namenode\.name\.dir/!b;n;c\        <value>file://'$HADOOP_DATA_DIR/namenode'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 sed -i -e '/dfs\.datanode\.data\.dir/!b;n;c\        <value>file://'$HADOOP_DATA_DIR/datanode'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-
-sed -i -e '/dfs\.namenode\.shared\.edits\.dir/!b;n;c\        <value>qjournal://'$JOURNAL_CONNS'/'$CLUSTER_NAME'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 
 splitStrToArray(){
 #shell函数定义的变量也是global的，其作用域从 函数被调用执行变量的地方 开始，到shell或结束或者显示删除为止。函数定义的变量可以是local的，其作用域局限于函数内部。但是函数的参数是local的。
@@ -39,6 +39,7 @@ do
     fi
 done
 
+##cluster hdfs federation集群之间是需要相互知道的
 sed -i -e '/<\/configuration>/ i\
     <!--hdfs的nameservice为'$nameservices'-->\
     <property>\
