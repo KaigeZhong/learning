@@ -1,59 +1,13 @@
 version: "3"
 services:
-  namenode1:
-    image: hadoop_hdfs_namenode_custom:latest
-    container_name: namenode1
+  datanode1:
+    image: hadoop_hdfs_datanode_custom:latest
+    container_name: datanode1
     environment:
       - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
       - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
       - NAME_SERVICE=nameservice1
       - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
-      # zkfc和namenode的格式化，在同一cluster的两台namenode上执行的指令是不同的，NAMENODE_FIRST_TAG用于区分两台namenode
-      - NAMENODE_FIRST_TAG=true
-    ports:
-      - 50071:50070
-    networks:
-      - net_custom
-
-  namenode2:
-    image: hadoop_hdfs_namenode_custom:latest
-    container_name: namenode2
-    environment:
-      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
-      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
-      - NAME_SERVICE=nameservice1
-      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
-      - NAMENODE_FIRST_TAG=false
-    ports:
-      - 50072:50070
-    networks:
-      - net_custom
-
-  namenode3:
-    image: hadoop_hdfs_namenode_custom:latest
-    container_name: namenode3
-    environment:
-      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
-      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
-      - NAME_SERVICE=nameservice2
-      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
-      - NAMENODE_FIRST_TAG=true
-    ports:
-      - 50073:50070
-    networks:
-      - net_custom
-
-  namenode4:
-    image: hadoop_hdfs_namenode_custom:latest
-    container_name: namenode4
-    environment:
-      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
-      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
-      - NAME_SERVICE=nameservice2
-      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
-      - NAMENODE_FIRST_TAG=false
-    ports:
-      - 50074:50070
     networks:
       - net_custom
 
