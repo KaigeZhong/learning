@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <!--尝试把resourcemannager相关配置移除，但是会出错,故将resourcemanager和nodemanager的配置保持一致-->
 
     <!--yarn只是一个资源管理的框架，并不是一个计算框架，计算框架可以运行在yarn上。我们所能做的就是向RM申请container,然后配合NM一起来启动container。所以要想在yarn上运行非特定计算框架的程序，我们就得实现自己的client和applicationMaster。另外我们自定义的AM需要放在各个NM的classpath下，因为AM可能运行在任何NM所在的机器上。
 我们熟知的MapReduce应用程序其实是已经实现了applicationmaster和client,我们是在已经实现的基础上去编程-->
