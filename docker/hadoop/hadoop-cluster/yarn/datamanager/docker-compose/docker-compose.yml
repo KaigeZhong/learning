@@ -1,0 +1,27 @@
+version: "3"
+services:
+  nodemanager1:
+    image: hadoop_yarn_nm_custom:latest
+    container_name: nodemanager1
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager1
+      - RMS=resourcemanager1,resourcemanager2
+    networks:
+      - net_custom
+
+  nodemanager2:
+    image: hadoop_yarn_nm_custom:latest
+    container_name: nodemanager2
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager1
+      - RMS=resourcemanager1,resourcemanager2
+    networks:
+      - net_custom
+
+
+
+networks:
+  net_custom:
+    driver: bridge
