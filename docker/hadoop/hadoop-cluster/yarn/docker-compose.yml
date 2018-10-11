@@ -1,0 +1,102 @@
+version: "3"
+services:
+  zookeeper1:
+    image: zookeeper_custom:latest
+    container_name: zk1
+    environment:
+      - MYID=1
+      - SERVER_1=server.1=zk1:2888:3888
+      - SERVER_2=server.2=zk2:2888:3888
+      - SERVER_3=server.3=zk3:2888:3888
+    ports:
+      - 2181:2181
+    networks:
+      - net_custom
+
+  zookeeper2:
+    image: zookeeper_custom:latest
+    container_name: zk2
+    environment:
+      - MYID=2
+      - SERVER_1=server.1=zk1:2888:3888
+      - SERVER_2=server.2=zk2:2888:3888
+      - SERVER_3=server.3=zk3:2888:3888
+    ports:
+      - 2182:2181
+    networks:
+      - net_custom
+
+  zookeeper3:
+    image: zookeeper_custom:latest
+    container_name: zk3
+    environment:
+      - MYID=3
+      - SERVER_1=server.1=zk1:2888:3888
+      - SERVER_2=server.2=zk2:2888:3888
+      - SERVER_3=server.3=zk3:2888:3888
+    ports:
+      - 2183:2181
+    networks:
+      - net_custom
+
+  resourcemanager1:
+    image: hadoop_yarn_rm_custom:latest
+    container_name: resourcemanager1
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager1
+      - RMS=resourcemanager1,resourcemanager2
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    ports:
+      - 8089:8088
+    networks:
+      - net_custom
+
+  resourcemanager2:
+    image: hadoop_yarn_rm_custom:latest
+    container_name: resourcemanager2
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager2
+      - RMS=resourcemanager1,resourcemanager2
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    ports:
+      - 8090:8088
+    networks:
+      - net_custom
+
+  nodemanager1:
+    image: hadoop_yarn_nm_custom:latest
+    container_name: nodemanager1
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager1
+      - RMS=resourcemanager1,resourcemanager2
+    depends_on:
+      - resourcemanager1
+      - resourcemanager2
+    networks:
+      - net_custom
+
+  nodemanager2:
+    image: hadoop_yarn_nm_custom:latest
+    container_name: nodemanager2
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager1
+      - RMS=resourcemanager1,resourcemanager2
+    depends_on:
+      - resourcemanager1
+      - resourcemanager2
+    networks:
+      - net_custom
+
+networks:
+  net_custom:
+    driver: bridge

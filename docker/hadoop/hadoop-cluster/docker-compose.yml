@@ -1,0 +1,246 @@
+version: "3"
+services:
+  zookeeper1:
+    image: zookeeper_custom:latest
+    container_name: zk1
+    environment:
+      - MYID=1
+      - SERVER_1=server.1=zk1:2888:3888
+      - SERVER_2=server.2=zk2:2888:3888
+      - SERVER_3=server.3=zk3:2888:3888
+    ports:
+      - 2181:2181
+    networks:
+      - net_custom
+
+  zookeeper2:
+    image: zookeeper_custom:latest
+    container_name: zk2
+    environment:
+      - MYID=2
+      - SERVER_1=server.1=zk1:2888:3888
+      - SERVER_2=server.2=zk2:2888:3888
+      - SERVER_3=server.3=zk3:2888:3888
+    ports:
+      - 2182:2181
+    networks:
+      - net_custom
+
+  zookeeper3:
+    image: zookeeper_custom:latest
+    container_name: zk3
+    environment:
+      - MYID=3
+      - SERVER_1=server.1=zk1:2888:3888
+      - SERVER_2=server.2=zk2:2888:3888
+      - SERVER_3=server.3=zk3:2888:3888
+    ports:
+      - 2183:2181
+    networks:
+      - net_custom
+
+  journalnode1:
+    image: hadoop_hdfs_journalnode_custom:latest
+    container_name: journalnode1
+    networks:
+      - net_custom
+  journalnode2:
+    image: hadoop_hdfs_journalnode_custom:latest
+    container_name: journalnode2
+    networks:
+      - net_custom
+  journalnode3:
+    image: hadoop_hdfs_journalnode_custom:latest
+    container_name: journalnode3
+    networks:
+      - net_custom
+
+  namenode1:
+    image: hadoop_hdfs_namenode_custom:latest
+    container_name: namenode1
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
+      - NAME_SERVICE=nameservice1
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+      # zkfc和namenode的格式化，在同一cluster的两台namenode上执行的指令是不同的，NAMENODE_FIRST_TAG用于区分两台namenode
+      - NAMENODE_FIRST_TAG=true
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+      - journalnode1
+      - journalnode2
+      - journalnode3
+    ports:
+      - 50071:50070
+    networks:
+      - net_custom
+
+  namenode2:
+    image: hadoop_hdfs_namenode_custom:latest
+    container_name: namenode2
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
+      - NAME_SERVICE=nameservice1
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+      - NAMENODE_FIRST_TAG=false
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+      - journalnode1
+      - journalnode2
+      - journalnode3
+    ports:
+      - 50072:50070
+    networks:
+      - net_custom
+
+  namenode3:
+    image: hadoop_hdfs_namenode_custom:latest
+    container_name: namenode3
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
+      - NAME_SERVICE=nameservice2
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+      - NAMENODE_FIRST_TAG=true
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+      - journalnode1
+      - journalnode2
+      - journalnode3
+    ports:
+      - 50073:50070
+    networks:
+      - net_custom
+
+  namenode4:
+    image: hadoop_hdfs_namenode_custom:latest
+    container_name: namenode4
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
+      - NAME_SERVICE=nameservice2
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+      - NAMENODE_FIRST_TAG=false
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+      - journalnode1
+      - journalnode2
+      - journalnode3
+    ports:
+      - 50074:50070
+    networks:
+      - net_custom
+
+  datanode1:
+    image: hadoop_hdfs_datanode_custom:latest
+    container_name: datanode1
+    environment:
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+    networks:
+      - net_custom
+    depends_on:
+      - namenode1
+      - namenode2
+      - namenode3
+      - namenode4
+
+  datanode2:
+    image: hadoop_hdfs_datanode_custom:latest
+    container_name: datanode2
+    environment:
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+    depends_on:
+      - namenode1
+      - namenode2
+      - namenode3
+      - namenode4
+    networks:
+      - net_custom
+
+  datanode3:
+    image: hadoop_hdfs_datanode_custom:latest
+    container_name: datanode3
+    environment:
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+    depends_on:
+      - namenode1
+      - namenode2
+      - namenode3
+      - namenode4
+    networks:
+      - net_custom
+
+
+
+
+  resourcemanager1:
+    image: hadoop_yarn_rm_custom:latest
+    container_name: resourcemanager1
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager1
+      - RMS=resourcemanager1,resourcemanager2
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    ports:
+      - 8089:8088
+    networks:
+      - net_custom
+
+  resourcemanager2:
+    image: hadoop_yarn_rm_custom:latest
+    container_name: resourcemanager2
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager2
+      - RMS=resourcemanager1,resourcemanager2
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    ports:
+      - 8090:8088
+    networks:
+      - net_custom
+
+  nodemanager1:
+    image: hadoop_yarn_nm_custom:latest
+    container_name: nodemanager1
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager1
+      - RMS=resourcemanager1,resourcemanager2
+    depends_on:
+      - resourcemanager1
+      - resourcemanager2
+    networks:
+      - net_custom
+
+  nodemanager2:
+    image: hadoop_yarn_nm_custom:latest
+    container_name: nodemanager2
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager1
+      - RMS=resourcemanager1,resourcemanager2
+    depends_on:
+      - resourcemanager1
+      - resourcemanager2
+    networks:
+      - net_custom
+
+
+networks:
+  net_custom:
+    driver: bridge
