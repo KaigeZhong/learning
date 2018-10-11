@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--yarn只是一个资源管理的框架，并不是一个计算框架，计算框架可以运行在yarn上。我们所能做的就是向RM申请container,然后配合NM一起来启动container。所以要想在yarn上运行非特定计算框架的程序，我们就得实现自己的client和applicationMaster。另外我们自定义的AM需要放在各个NM的classpath下，因为AM可能运行在任何NM所在的机器上。
+我们熟知的MapReduce应用程序其实是已经实现了applicationmaster和client,我们是在已经实现的基础上去编程-->
+    <!--##########################custom config#############################-->
+    <property>
+        <name>yarn.resourcemanager.ha.id</name>
+        <value>rm1</value>
+    </property>
+
+    <!--#############################common config############################-->
+    <property>
+        <name>yarn.resourcemanager.cluster-id</name>
+	<value>yarn-cluster-id</value>
+    </property>
+    
+    <!--Address of the ZK-quorum. Used both for the state-store and embedded leader-election.-->
+    <property>
+        <name>yarn.resourcemanager.zk-address</name>
+        <value>dn1:2181,dn2:2181,dn3:2181</value>
+    </property>
+    <!--开启ha和自动切换failover-->
+    <property>
+        <name>yarn.resourcemanager.ha.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.ha.automatic-failover.enabled</name>
+        <value>true</value>
+    </property>
+    <!--采用zk作为statestore，会使用上面配置的zk-address,除了zk还可以采用hdfs或内存来进行状态存储 -->
+    <property>
+        <name>yarn.resourcemanager.store.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore</value>
+    </property>
+    <!--开启statestore自动恢复功能 -->
+    <property>
+        <name>yarn.resourcemanager.recovery.enabled</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.local-dirs</name>
+        <value>/home/hadoop/data/yarn/data</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.log-dirs</name>
+        <value>/home/hadoop/data/yarn/log</value>
+    </property>
+
+    <!--AuxServices  NodeManager同意用户通过配置附属服务的方式扩展自己的功能，这使得每一个节点能够定制一些特定框架须要的服务。
+附属服务须要在NM启动前配置好，并由NM统一启动和关闭。
+
+典型的应用是MapReduce框架中用到的Shuffle HTTP Server，其通过封装成一个附属服务由各个NodeManager启动。-->
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>mapreduce.shuffle.port</name>
+        <value>23080</value>
+    </property>
+   <!--
+    <property>
+        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+    </property>
+   -->
+
+
+
+</configuration>

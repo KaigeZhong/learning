@@ -103,6 +103,7 @@ done
 
 ####一下代码只适用于当采用docker-compose自动启动
 
+####采取循环执行是因为同一个nameservice的namenode之间存在依赖，不同nameservice之间也会在启动时依赖
 #第一步，格式化zkfc。在一个cluster中,只会在一台namenode上执行
 if [ $NAMENODE_FIRST_TAG -a $NAMENODE_FIRST_TAG = true ] #shell中没有布尔，这里的true实际是字符串
 then

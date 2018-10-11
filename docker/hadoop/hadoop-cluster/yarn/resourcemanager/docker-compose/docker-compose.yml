@@ -1,0 +1,30 @@
+version: "3"
+services:
+  resourcemanager1:
+    image: hadoop_yarn_rm_custom:latest
+    container_name: resourcemanager1
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager1
+      - RMS=resourcemanager1,resourcemanager2
+    ports:
+      - 8089:8088
+    networks:
+      - net_custom
+
+  resourcemanager2:
+    image: hadoop_yarn_rm_custom:latest
+    container_name: resourcemanager2
+    environment:
+      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
+      - RM=resourcemanager2
+      - RMS=resourcemanager1,resourcemanager2
+    ports:
+      - 8090:8088
+    networks:
+      - net_custom
+
+
+networks:
+  net_custom:
+    driver: bridge
