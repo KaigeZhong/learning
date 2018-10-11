@@ -2,16 +2,9 @@
 
 ##################################配置#########################
 
-#core-site.xml
-sed -i -e '/fs\.defaultFS/!b;n;c\        <value>hdfs://'"$NAME_SERVICE"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
 sed -i -e '/hadoop\.tmp\.dir/!b;n;c\        <value>'"$HADOOP_DATA_DIR/tmp"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
-sed -i -e '/ha\.zookeeper\.quorum/!b;n;c\        <value>'"$ZOOKEEPER_CONNS"'</value>' $HADOOP_HOME/etc/hadoop/core-site.xml
 
 #hdfs-site.xml
-sed -i -e '/dfs\.namenode\.shared\.edits\.dir/!b;n;c\        <value>qjournal://'$JOURNAL_CONNS'/'$NAME_SERVICE'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-
-sed -i -e '/dfs\.journalnode\.edits\.dir/!b;n;c\        <value>'$HADOOP_DATA_DIR/journal'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-sed -i -e '/dfs\.namenode\.name\.dir/!b;n;c\        <value>file://'$HADOOP_DATA_DIR/namenode'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 sed -i -e '/dfs\.datanode\.data\.dir/!b;n;c\        <value>file://'$HADOOP_DATA_DIR/datanode'</value>' $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 
 splitStrToArray(){
@@ -25,6 +18,7 @@ splitStrToArray(){
     echo ${arr[*]}
 }
 
+#获取nameservice的list字符串
 name_services_arr=(`splitStrToArray "$NAME_SERVICES" ";"`)
 for name_service_str in ${name_services_arr[*]} 
 do 
@@ -41,7 +35,7 @@ done
 
 ## hdfs federation nameservices集群之间是需要相互知道的
 sed -i -e '/<\/configuration>/ i\
-    <!--hdfs的nameservices为'$nameservices'-->\
+    <!--hdfs的nameservices为'$nameservices_str'-->\
     <property>\
         <name>dfs.nameservices</name>\
         <value>'$nameservices_str'</value>\
@@ -82,20 +76,10 @@ do
         $HADOOP_HOME/etc/hadoop/hdfs-site.xml
     done
     
-    sed -i -e '/<\/configuration>/ i\
-    <property>\
-        <name>dfs.ha.automatic-failover.enabled.'$nameservice'</name>\
-        <value>true</value>\
-    </property>\
-    <property>\
-        <name>dfs.client.failover.proxy.provider.'$nameservice'</name>\
-        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>\
-    </property>'\
-    $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 done
 
 ######################################启动########################
-/bin/bash
+##/bin/bash
 
 ######如果想只配置,然后再手动去启动hadoop，可以注释掉下面所有的指令，然后放开上面的/bin/bash
 $HADOOP_HOME/bin/hdfs datanode

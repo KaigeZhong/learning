@@ -4,13 +4,25 @@ services:
     image: hadoop_hdfs_datanode_custom:latest
     container_name: datanode1
     environment:
-      - ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181
-      - JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485
-      - NAME_SERVICE=nameservice1
       - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
     networks:
       - net_custom
 
+  datanode2:
+    image: hadoop_hdfs_datanode_custom:latest
+    container_name: datanode2
+    environment:
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+    networks:
+      - net_custom
+
+  datanode3:
+    image: hadoop_hdfs_datanode_custom:latest
+    container_name: datanode3
+    environment:
+      - NAME_SERVICES=nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4
+    networks:
+      - net_custom
 
 networks:
   net_custom:

@@ -23,13 +23,8 @@ RUN wget -q -O - http://mirrors.shu.edu.cn/apache/hadoop/common/stable/hadoop-${
 #在hadoop-env.sh会读取JAVA_HOME环境变量
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 #在run.sh中配置core-site.xml和hdfs-site.xml中会使用到
-ENV ZOOKEEPER_CONNS=zk1:2181,zk2:2181,zk3:2181 \
-JOURNAL_CONNS=journalnode1:8485;journalnode2:8485;journalnode3:8485 \
-HADOOP_DATA_DIR=$HADOOP_HOME/data \
-NAME_SERVICE=nameservice1 \
-NAME_SERVICES="nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4" \
-#HDFS Federation下所有的nameservices的cluster id必须是相同的
-CLUSTER_ID=uuid_jhagb4854hhjba5b1
+ENV HADOOP_DATA_DIR=$HADOOP_HOME/data \
+NAME_SERVICES="nameservice1:namenode1,namenode2;nameservice2:namenode3,namenode4"
 
 COPY config/ $HADOOP_HOME/etc/hadoop/
 COPY ./run.sh /opt/run.sh

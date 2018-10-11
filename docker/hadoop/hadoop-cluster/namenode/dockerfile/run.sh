@@ -25,6 +25,7 @@ splitStrToArray(){
     echo ${arr[*]}
 }
 
+#获取nameservice的list字符串
 name_services_arr=(`splitStrToArray "$NAME_SERVICES" ";"`)
 for name_service_str in ${name_services_arr[*]} 
 do 
@@ -41,7 +42,7 @@ done
 
 ## hdfs federation nameservices集群之间是需要相互知道的
 sed -i -e '/<\/configuration>/ i\
-    <!--hdfs的nameservices为'$nameservices'-->\
+    <!--hdfs的nameservices为'$nameservices_str'-->\
     <property>\
         <name>dfs.nameservices</name>\
         <value>'$nameservices_str'</value>\

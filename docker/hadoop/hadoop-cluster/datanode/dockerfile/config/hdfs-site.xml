@@ -1,51 +1,5 @@
 <configuration>
 
-    <!--###################### 定制化配置 ############################3-->
-    <!-- hadoop-rokid1 JournalNode配置 两者配置不一样 每一个namespace下 只存其一-->
-    <property>
-        <name>dfs.namenode.shared.edits.dir</name>
-        <value>qjournal://hadoop_hdfs_journalnode1:8485;hadoop_hdfs_journalnode2:8485;hadoop_hdfs_journalnode3:8485/cluster1</value>
-    </property>
-
-
-
-
-    <!--###################### common confg #####################-->
-    <!--指定JournalNode存放数据的位置-->
-    <property>
-        <name>dfs.journalnode.edits.dir</name>
-        <value>/opt/hadoop/data/journal</value>
-    </property>
-    <!--配置隔离机制-->
-    <!-- 当配置了HDFS HA集群时，会有两个NameNode，为了避免两个NN都为Active状态(这种情况称为split-brain scenario)，当发生failover时，Standby的节点要执行一系列方法把原来那个Active节点中不健康的NameNode服务给杀掉（这个过程就称为fence）。而下面这个配置就是配置了执行杀死原来Active NameNode服务的方法。这里面配置的所有方法都会被顺序的执行，最后返回结果即为fence过程的结果。如果fence执行成功，就把原来为Standby的NameNode的状态提升为Active。sshfence方法会通过ssh远程调用fuser命令去找到NameNode服务并杀死它。我们的目标是当发生failover时，不论如何，就算前面的sshfence执行失败（比如服务器上不存在fuser命令），依然把Standby节点的状态提升为Active，所以最后无论如何要配置一个shell(/bin/true)，保证不论前面的方法执行的情况如何，最后fence过程返回的结果都为true。dfs.ha.fencing.ssh.private-key-files配置了ssh命令所需要用到的私钥。-->
-    <property>
-        <name>dfs.ha.fencing.methods</name>
-        <value>sshfence</value>
-    </property>
-    <!--配置隔离机制的ssh登录秘钥所在的位置, 所以hadoop的namenode之间需要免秘钥登录-->
-    <property>
-        <name>dfs.ha.fencing.ssh.private-key-files</name>
-        <value>/root/.ssh/id_rsa</value>
-    </property>
-   <!--提到ssh这里多提两句关于slave文件配置,这是官方文档描述: 
-Slaves File
-List all slave hostnames or IP addresses in your etc/hadoop/slaves file, one per line. Helper scripts (described below) will use the etc/hadoop/slaves file to run commands on many hosts at once. It is not used for any of the Java-based Hadoop configuration. In order to use this functionality, ssh trusts (via either passphraseless ssh or some other means, such as Kerberos) must be established for the accounts used to run Hadoop. 
-slaves 文件跟并不是hadoop的运行时配置，而是用于在namenode中去启动datanode集群,这时会采用ssh方式，所以namenode和datanode之间也需要秘钥.但如果我们不要从namenode中启动的话，是不要配置slaves文件，namenode和datanode之间就不需要免秘钥了
-   -->
-
-
-    <!--配置namenode数据存放的位置,可以不配置，如果不配置，默认用的是core-site.xml里配置的hadoop.tmp.dir的路径-->
-    <property>
-        <name>dfs.namenode.name.dir</name>
-        <value>file:///opt/hadoop/data/namenode</value>
-    </property>
-
-    <!--配置block副本数量-->
-    <property>
-        <name>dfs.replication</name>
-        <value>3</value>
-    </property>
-
     <!--配置datanode数据存放的位置,可以不配置，如果不配置，默认用的是core-site.xml里配置的hadoop.tmp.dir的路径-->
     <property>
         <name>dfs.datanode.data.dir</name>
