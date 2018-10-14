@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>maven</artifactId>
+        <groupId>maven</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>check-style</artifactId>
+
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <!--插件已经内置了sun_checks.xml和google_checks.xml的配置，默认插件使用sun_checks
+                    .xml，在这里我们指定google的配置-->
+                    <configLocation>google_checks.xml</configLocation>
+                    <!--<headerLocation>gradoop/LICENSE.txt</headerLocation>-->
+                    <!--<includeResources>false</includeResources>-->
+                    <!--<includeTestResources>false</includeTestResources>-->
+                    <!--<suppressionsLocation>gradoop/checkstyle-suppressions.xml</suppressionsLocation>-->
+                    <!--<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>-->
+                    <!--<failsOnError>true</failsOnError>-->
+                    <!--<consoleOutput>true</consoleOutput>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

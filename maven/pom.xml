@@ -16,6 +16,7 @@
         <module>docker-parent</module>
         <module>jar</module>
         <module>java-version</module>
+        <module>check-style</module>
     </modules>
 
 
