@@ -24,11 +24,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.0.0</version>
+                <!--google 的styleguide: https://github.com/google/styleguide 定义了一系列的style规范，其中包括了java。
+                checkstyle仅仅是支持规范的工具
+                -->
                 <configuration>
                     <!--插件已经内置了sun_checks.xml和google_checks.xml的配置，默认插件使用sun_checks
                     .xml，在这里我们指定google的配置-->
-                    <!--<configLocation>google_checks.xml</configLocation>-->
-                    <configLocation>${project.basedir}/src/main/resources/custom_check_style.xml</configLocation>
+                    <configLocation>google_checks.xml</configLocation>
+                    <!--<configLocation>${project.basedir}/src/main/resources/custom_check_style.xml</configLocation>-->
 
                     <!--The lowest severity level that is considered a violation.-->
                     <violationSeverity>warning</violationSeverity>
