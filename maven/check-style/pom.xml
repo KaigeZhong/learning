@@ -13,22 +13,31 @@
 
     <build>
         <plugins>
-            <plugin>
+            <!--
+            除了通过maven插件来检查，我们还可以配置idea的code style来协助我们写出符合规范的代码
 
+            例如把idea的codestyle设置成google的style: https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml
+            1. 将google的idea配置文件下载下来，存放在本地
+            2. 选择idea的setting下的Editor -> Code Stytle -> Java，然后import刚刚下载的配置文件
+            -->
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
                     <!--插件已经内置了sun_checks.xml和google_checks.xml的配置，默认插件使用sun_checks
                     .xml，在这里我们指定google的配置-->
-                    <configLocation>google_checks.xml</configLocation>
-                    <!--<headerLocation>gradoop/LICENSE.txt</headerLocation>-->
-                    <!--<includeResources>false</includeResources>-->
-                    <!--<includeTestResources>false</includeTestResources>-->
-                    <!--<suppressionsLocation>gradoop/checkstyle-suppressions.xml</suppressionsLocation>-->
-                    <!--<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>-->
-                    <!--<failsOnError>true</failsOnError>-->
-                    <!--<consoleOutput>true</consoleOutput>-->
+                    <!--<configLocation>google_checks.xml</configLocation>-->
+                    <configLocation>${project.basedir}/src/main/resources/custom_check_style.xml</configLocation>
+
+                    <!--The lowest severity level that is considered a violation.-->
+                    <violationSeverity>warning</violationSeverity>
+                    <!--the build fails immediately after running Checkstyle-->
+                    <failsOnError>true</failsOnError>
+
+                    <!--配置指定文件不执行某些检查-->
+                    <suppressionsLocation>${project.basedir}/src/main/resources/suppression/checkstyle-suppressions.xml</suppressionsLocation>
+                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                 </configuration>
                 <executions>
                     <execution>
