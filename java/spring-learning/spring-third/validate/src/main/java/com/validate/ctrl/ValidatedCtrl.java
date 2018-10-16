@@ -21,10 +21,6 @@ public class ValidatedCtrl {
    * (ConstraintViolation<?> s:e.getConstraintViolations()){ return s.getInvalidValue()+": "+s
    * .getMessage(); } return "请求参数不合法"; } }
    *
-   * ---------------------
-   *
-   * 本文来自 曹金桂 的CSDN 博客 ，全文地址请点击：https://blog.csdn
-   * .net/onupway/article/details/78367629?utm_source=copy
    * @param vStr
    * @return
    */

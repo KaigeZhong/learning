@@ -15,6 +15,7 @@
     <modules>
         <module>mybatis</module>
         <module>validate</module>
+        <module>swagger</module>
     </modules>
 
     <dependencyManagement>

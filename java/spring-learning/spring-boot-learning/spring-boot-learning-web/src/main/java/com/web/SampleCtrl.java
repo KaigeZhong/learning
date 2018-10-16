@@ -15,6 +15,7 @@ DispatcherServlet会在onRefresh()创建tomcat的时候在后台线程中实例�
 而DispatcherServlet的handlerMappings（例如RequestMappingHandlerMapping
 ）则会在后面的finishBeanFactoryInitialization(beanFactory)主线程中被实例化。
  */
+//RestController 本质就是@ResponseBody + @Controller
 @RestController
 public class SampleCtrl {
     public SampleCtrl() {
