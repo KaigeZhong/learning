@@ -1,4 +1,4 @@
-package com.learning.spring.third.swagger.config;
+package com.learning.spring.third.swagger.common.config;
 
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
@@ -44,7 +44,7 @@ public class Swagger2CustomConf {
                  * private Predicate<String> pathSelector
                  * 所有的predicate会做and操作, 满足所有要求的接口swagger才会处理
                  */
-                .apis(RequestHandlerSelectors.basePackage("com.learning.spring.third.swagger.ctrl"))//指定包下面的接口才会处理
+                .apis(RequestHandlerSelectors.basePackage("com.learning.spring.third.swagger.common.ctrl"))//指定包下面的接口才会处理
                 .paths(Predicates.not(PathSelectors.regex("/error")))//指定路径不处理
                 .paths(PathSelectors.any())
                 /*###### 指定swagger处理的接口  end ####*/

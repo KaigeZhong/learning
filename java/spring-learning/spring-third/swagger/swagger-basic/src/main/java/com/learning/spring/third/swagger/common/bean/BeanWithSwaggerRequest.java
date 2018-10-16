@@ -1,4 +1,4 @@
-package com.learning.spring.third.swagger.bean;
+package com.learning.spring.third.swagger.common.bean;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

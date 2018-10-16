@@ -1,7 +1,7 @@
-package com.learning.spring.third.swaggerui.ctrl;
+package com.learning.spring.third.swagger.common.ctrl;
 
-import com.learning.spring.third.swaggerui.bean.BeanWithSwaggerRequest;
-import com.learning.spring.third.swaggerui.bean.BeanWithSwaggerResponse;
+import com.learning.spring.third.swagger.common.bean.BeanWithSwaggerRequest;
+import com.learning.spring.third.swagger.common.bean.BeanWithSwaggerResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@Api(description = "sample swagger 测试 ctrl")
+@Api(description = "sample swagger 测试 ctrl class")
 public class SampleCtrlWithSwagger {
 
     @RequestMapping(value = "/test/model", method = RequestMethod.POST)
