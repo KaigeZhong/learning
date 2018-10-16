@@ -14,6 +14,8 @@ public class BeanWithSwaggerRequest {
     private Integer id;
     @ApiModelProperty(value = "名字", required = true, allowEmptyValue = true)
     private String name;
+    @ApiModelProperty(value = "额外信息")
+    private ExtInfo extInfo;
 
     public BeanWithSwaggerRequest(Integer id, String name, String age) {
         this.id = id;
@@ -36,4 +38,11 @@ public class BeanWithSwaggerRequest {
         this.name = name;
     }
 
+    public ExtInfo getExtInfo() {
+        return extInfo;
+    }
+
+    public void setExtInfo(ExtInfo extInfo) {
+        this.extInfo = extInfo;
+    }
 }
