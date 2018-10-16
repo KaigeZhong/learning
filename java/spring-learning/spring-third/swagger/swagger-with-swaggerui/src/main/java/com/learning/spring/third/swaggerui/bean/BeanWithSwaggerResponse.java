@@ -1,17 +1,22 @@
-package com.learning.spring.third.swaggerconfig.bean;
+package com.learning.spring.third.swaggerui.bean;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "swagger 测试model")
-public class BeanWithSwagger {
+/**
+ * @ApiModel：描述一个Model的信息
+ *
+ *       @ApiModelProperty：描述一个model的属性
+ */
+@ApiModel(description = "swagger 测试response model")
+public class BeanWithSwaggerResponse {
     @ApiModelProperty(value = "id", required = true)
     private Integer id;
-    @ApiModelProperty(value = "名字", required = true)
+    @ApiModelProperty(value = "名字", required = true, allowEmptyValue = true)
     private String name;
     @ApiModelProperty(value = "年龄")
     private String age;
-    public BeanWithSwagger(Integer id, String name, String age) {
+    public BeanWithSwaggerResponse(Integer id, String name, String age) {
         this.id = id;
         this.name = name;
         this.age = age;

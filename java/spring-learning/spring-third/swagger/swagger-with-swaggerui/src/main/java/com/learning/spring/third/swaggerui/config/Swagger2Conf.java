@@ -1,4 +1,4 @@
-package com.learning.spring.third.swaggeruiconfig.config;
+package com.learning.spring.third.swaggerui.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +41,7 @@ public class Swagger2Conf {
                  * private Predicate<String> pathSelector
                  * 所有的predicate会做and操作, 满足所有要求的接口swagger才会处理
                  */
-                .apis(RequestHandlerSelectors.basePackage("com.learning.spring.third.swaggeruiconfig.ctrl"))//指定包下面的接口才会处理
+                .apis(RequestHandlerSelectors.basePackage("com.learning.spring.third.swaggerui.ctrl"))//指定包下面的接口才会处理
 //                .paths(Predicates.not(PathSelectors.regex("/error")))//指定路径不处理
                 .paths(PathSelectors.any())
                 /*###### 指定swagger处理的接口  end ####*/
@@ -54,9 +54,9 @@ public class Swagger2Conf {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("新潮CAS服务 RESTful API")
-                .description("")
-                .termsOfServiceUrl("")
+                .title("demo RESTful API")
+                .description("just for learning swagger")
+                .termsOfServiceUrl("no terms")
                 .version("2.0")
                 .build();
     }

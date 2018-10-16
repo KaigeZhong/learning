@@ -1,20 +1,23 @@
-package com.learning.spring.third.swaggerui.bean;
+package com.learning.spring.third.swagger.bean;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "swagger 测试model")
-public class BeanWithSwagger {
+/**
+ * @ApiModel：描述一个Model的信息
+ *
+ *       @ApiModelProperty：描述一个model的属性
+ */
+@ApiModel(description = "swagger 测试request model")
+public class BeanWithSwaggerRequest {
     @ApiModelProperty(value = "id", required = true)
     private Integer id;
-    @ApiModelProperty(value = "名字", required = true)
+    @ApiModelProperty(value = "名字", required = true, allowEmptyValue = true)
     private String name;
-    @ApiModelProperty(value = "年龄")
-    private String age;
-    public BeanWithSwagger(Integer id, String name, String age) {
+
+    public BeanWithSwaggerRequest(Integer id, String name, String age) {
         this.id = id;
         this.name = name;
-        this.age = age;
     }
 
     public Integer getId() {
@@ -33,11 +36,4 @@ public class BeanWithSwagger {
         this.name = name;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
 }
