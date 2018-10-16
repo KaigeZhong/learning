@@ -6,8 +6,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan("com.learning.spring.third.swagger.common")
-public class SwaggeruiApp {
+public class SwaggerUIApp {
     public static void main(String[] args) {
-        SpringApplication.run(SwaggeruiApp.class, args);
+        SpringApplication.run(SwaggerUIApp.class, args);
     }
 }
