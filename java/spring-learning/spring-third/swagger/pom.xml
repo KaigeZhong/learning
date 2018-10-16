@@ -14,7 +14,6 @@
     <modules>
         <module>swagger-basic</module>
         <module>swagger-with-swaggerui</module>
-        <module>swagger-basic-custom-config</module>
     </modules>
 
 </project>

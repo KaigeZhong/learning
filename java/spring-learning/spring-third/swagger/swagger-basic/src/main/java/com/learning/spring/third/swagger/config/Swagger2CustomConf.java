@@ -1,5 +1,6 @@
-package com.learning.spring.third.swaggerconfig.config;
+package com.learning.spring.third.swagger.config;
 
+import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -18,8 +19,10 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
-public class Swagger2Conf {
-
+public class Swagger2CustomConf {
+    /**
+     * 整个config并不是必须的，在这里只是做一些定制化配置.当不做定制化配置时，我们只需要在SwaggerApp中@EnableSwagger2即可.
+     */
     @Bean
     public Docket createRestApi() {
         //为每个接口添加token描述
@@ -41,8 +44,8 @@ public class Swagger2Conf {
                  * private Predicate<String> pathSelector
                  * 所有的predicate会做and操作, 满足所有要求的接口swagger才会处理
                  */
-                .apis(RequestHandlerSelectors.basePackage("com.learning.spring.third.swaggerconfig.ctrl"))//指定包下面的接口才会处理
-//                .paths(Predicates.not(PathSelectors.regex("/error")))//指定路径不处理
+                .apis(RequestHandlerSelectors.basePackage("com.learning.spring.third.swagger.ctrl"))//指定包下面的接口才会处理
+                .paths(Predicates.not(PathSelectors.regex("/error")))//指定路径不处理
                 .paths(PathSelectors.any())
                 /*###### 指定swagger处理的接口  end ####*/
 
@@ -54,9 +57,8 @@ public class Swagger2Conf {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("新潮CAS服务 RESTful API")
-                .description("")
-                .termsOfServiceUrl("")
+                .title("demo RESTful API")
+                .description("just for learning swagger")
                 .version("2.0")
                 .build();
     }
