@@ -1,6 +1,6 @@
 <configuration>
     <property>
         <name>test</name>
-        <value>a</value>
+        <value>b</value>
     </property>
 </configuration>

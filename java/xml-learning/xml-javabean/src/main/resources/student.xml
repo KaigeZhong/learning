@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<studentBean>
+    <studentAddress>中国</studentAddress>
+    <age>19</age>
+    <name>Kevin</name>
+</studentBean>

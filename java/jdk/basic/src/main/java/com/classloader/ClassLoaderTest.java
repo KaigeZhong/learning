@@ -1,25 +1,5 @@
 package com.classloader;
 
-class FileClassLoader extends  ClassLoader{
-  private String rootDir;
-
-  public FileClassLoader(String rootDir) {
-    super(null);
-    this.rootDir = rootDir;
-  }
-  // 编写获取类的字节码并创建class对象的逻辑
-  @Override
-  protected Class<?> findClass(String name) throws ClassNotFoundException {
-    //...省略逻辑代码
-    return null;
-  }
-  //编写读取字节流的方法
-  private byte[] getClassData(String className) {
-    // 读取类文件的字节
-    //省略代码....
-    return new byte[0];
-  }
-}
 
 public class ClassLoaderTest {
 
@@ -40,5 +20,26 @@ public class ClassLoaderTest {
      ExtClassLoader的父类加载器: null
      */
 
+  }
+
+  static class FileClassLoader extends  ClassLoader{
+    private String rootDir;
+
+    public FileClassLoader(String rootDir) {
+      super(null);
+      this.rootDir = rootDir;
+    }
+    // 编写获取类的字节码并创建class对象的逻辑
+    @Override
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
+      //...省略逻辑代码
+      return null;
+    }
+    //编写读取字节流的方法
+    private byte[] getClassData(String className) {
+      // 读取类文件的字节
+      //省略代码....
+      return new byte[0];
+    }
   }
 }
