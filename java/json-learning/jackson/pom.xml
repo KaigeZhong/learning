@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>json-learning</artifactId>
+        <groupId>json-learning</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jackson</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>jackson-basic</module>
+        <module>jackson-databind</module>
+    </modules>
+
+
+    <!--
+    Jackson主要包含了3个模块：
+
+    1. jackson-core
+    2. jackson-annotations
+    3. jackson-databind
+    其中，jackson-annotations依赖于jackson-core，jackson-databind又依赖于jackson-annotations。
+
+    Jackson有三种方式处理Json：
+
+    1. 使用底层的基于Stream的方式对Json的每一个小的组成部分进行控制
+    2. 使用Tree Model，通过JsonNode处理单个Json节点
+    3. 使用databind模块，直接对Java对象进行序列化和反序列化
+    通常来说，我们在日常开发中使用的是第3种方式，有时为了简便也会使用第2种方式，比如你要从一个很大的Json对象中只读取那么一两个字段的时候，采用databind方式显得有些重，JsonNode反而更简单。
+    -->
+
+
+</project>
