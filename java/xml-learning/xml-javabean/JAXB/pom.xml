@@ -3,18 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>xml-learning</artifactId>
+        <artifactId>xml-javabean</artifactId>
         <groupId>xml-learning</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xml-javabean</artifactId>
-    <packaging>pom</packaging>
-    <!--除了JAXB外，还有XStream等框架用于xml与javabean的转换-->
-    <modules>
-        <module>JAXB</module>
-    </modules>
+    <artifactId>JAXB</artifactId>
 
 
 </project>
