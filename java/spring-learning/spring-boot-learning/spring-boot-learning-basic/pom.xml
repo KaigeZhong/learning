@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>command-line-runner</module>
+        <module>auto-config</module>
     </modules>
 
     <dependencies>

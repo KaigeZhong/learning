@@ -1,4 +1,4 @@
-package com.autoconfig.profile.properties;
+package com.learning.spring.boot.basic.autoconfig.profile.properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
