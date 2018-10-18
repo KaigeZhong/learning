@@ -1,4 +1,4 @@
-package com.learning.json.jackson.databind.bean;
+package com.learning.json.jackson.databind.bean.pojo;
 
 public class Person {
     private String pName;

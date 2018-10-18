@@ -1,11 +1,12 @@
 package com.learning.json.jackson.databind;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.learning.json.jackson.databind.bean.Person;
-import com.learning.json.jackson.databind.bean.PersonWithAnnotation;
+import com.learning.json.jackson.databind.bean.Student;
+import com.learning.json.jackson.databind.bean.Teacher;
+import com.learning.json.jackson.databind.bean.pojo.Person;
+import com.learning.json.jackson.databind.bean.pojo.PersonWithAnnotation;
 
 public class JacksonDatabindApp {
     public static void main(String[] args) throws Exception {
@@ -47,6 +48,17 @@ public class JacksonDatabindApp {
         person.setpName("davenkinWithAnnotation");
         person.setpAddress("");
         System.out.println(objectMapper.writeValueAsString(person));
+        PersonWithAnnotation person1 = objectMapper.readValue("{\"p_name\":\"davenkin\",\"address_withJsonPropertyAnnotation\":\"\",\"p_mobile\":null}", PersonWithAnnotation.class);
+        System.out.println(person1.getpName());
+
+
+        Student student = new Student();
+        student.setsId(1);
+        student.setsName("student name");
+        Teacher teacher = new Teacher();
+        teacher.settName("teacher name");
+        student.setsTeacher(teacher);
+        System.out.println(objectMapper.writeValueAsString(student));
     }
 
 }

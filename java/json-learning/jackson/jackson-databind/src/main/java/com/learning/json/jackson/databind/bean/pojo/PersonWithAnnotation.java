@@ -1,4 +1,4 @@
-package com.learning.json.jackson.databind.bean;
+package com.learning.json.jackson.databind.bean.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonNaming(SnakeCaseStrategy.class) //指定Json字段名映射策略为蛇形大小写策略。缺省则直接使用Bean属性名
 public class PersonWithAnnotation {
     private String pName;
-    @JsonProperty(value = "user_name_withJsonPropertyAnnotation") //指定序列化时的字段名，默认使用属性名
+    @JsonProperty(value = "address_withJsonPropertyAnnotation") //指定序列化时的字段名，默认使用属性名
     private String pAddress;
     @JsonInclude(JsonInclude.Include.NON_NULL) //属性为NULL则不参与序列化
     private String pMobile;
