@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-boot-learning-basic</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>command-line-runner</module>
+    </modules>
 
     <dependencies>
         <dependency>

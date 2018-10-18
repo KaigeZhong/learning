@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SimpleCommandLineRunner implements CommandLineRunner {
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         System.out.println("spring-boot-learning-basic run");
     }
 }

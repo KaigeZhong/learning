@@ -4,6 +4,8 @@ import com.learning.spring.basic.annotation.bean.Import.BeanByImported;
 import com.learning.spring.basic.annotation.bean.Import.ConfigurationImport;
 import com.learning.spring.basic.annotation.bean.comfigurationandbean.BeanByBeanAnnotation;
 import com.learning.spring.basic.annotation.bean.comfigurationandbean.ConfigurationBean;
+import com.learning.spring.basic.annotation.bean.componentconig.ComponentBean;
+import com.learning.spring.basic.annotation.bean.componentconig.ComponentConfig;
 import com.learning.spring.basic.annotation.bean.componentscan.BeanByScan;
 import com.learning.spring.basic.annotation.bean.componentscan.ConfigurationBeanScan;
 import org.junit.Test;
@@ -26,6 +28,16 @@ public class SpringAnnotationBeanTest {
         BeanByBeanAnnotation beanByBeanAonotation =
                 (BeanByBeanAnnotation) ctx.getBean("beanByBeanAonotation");
         System.out.println(beanByBeanAonotation);
+    }
+
+    @Test
+    public void testComponentConfig() {
+    /*@Component也会被当做@Configuration处理
+     */
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(ComponentConfig.class);
+        ComponentBean componentBean =
+                (ComponentBean) ctx.getBean("componentBean");
+        System.out.println(componentBean);
     }
 
     @Test
