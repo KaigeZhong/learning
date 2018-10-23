@@ -16,7 +16,6 @@ public class HomeServlet extends HttpServlet {
         System.out.println("request scheme: " + req.getScheme());
 
         resp.getWriter().print("hello tomcat");
-
     }
 
 }
