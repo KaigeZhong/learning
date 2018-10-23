@@ -1,0 +1,9 @@
+#basic
+curl http://localhost:8080/web/http/servlet\?a=1
+#显示详情
+curl -v http://localhost:8080/web/http/servlet\?a=1
+#get 请求
+curl -X GET http://localhost:8080/search\?data=123
+#post请求
+curl -X POST -d"data=123&key=456" http://localhost:8080/search
+curl -H "Content-Type:application/json" -d '{"data":"123","key":"456"}' http://localhost:8080/search

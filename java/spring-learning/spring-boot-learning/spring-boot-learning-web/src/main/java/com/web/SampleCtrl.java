@@ -41,6 +41,12 @@ public class SampleCtrl {
         return "test";
     }
 
+    //会采用RequestResponseBodyMethodProcessor进行请求题解析
+    @RequestMapping("/body")
+    String user(@RequestBody Body body) {
+        return body.getId() + body.getName();
+    }
+
     //会采用PathVariableMethodArgumentResolver进行路径解析
     @RequestMapping("/path/{name}")
     String home(@PathVariable("name") String name) {
@@ -53,16 +59,11 @@ public class SampleCtrl {
         return id + name;
     }
 
-    //会采用RequestResponseBodyMethodProcessor进行请求题解析
-    @RequestMapping("/body")
-    String user(@RequestBody Body body) {
-        return body.getId() + body.getName();
-    }
 
     //会采用ServletModelAttributeMethodProcessor进行请求参数解析
-    @RequestMapping("/non")
-    String non(Non non) {
-        return non.getId() + non.getName();
+    @RequestMapping("/modelattr")
+    String modelAttr(@ModelAttribute Pojo pojo) {
+        return pojo.getId() + pojo.getName();
     }
 
     //会采用RequestParamMethodArgumentResolver进行请求参数解析
@@ -72,9 +73,10 @@ public class SampleCtrl {
     }
 
     //会采用ServletModelAttributeMethodProcessor进行请求参数解析
-    @RequestMapping("/modelattr")
-    String modelAttr(@ModelAttribute Pojo pojo) {
-        return pojo.getId() + pojo.getName();
+    @RequestMapping("/non")
+    String non(Non non) {
+        return non.getId() + non.getName();
     }
+
 
 }
