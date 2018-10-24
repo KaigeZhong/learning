@@ -8,6 +8,7 @@ package com.jni;
  * java com.jni.JavaJNI
  */
 public class JavaJNI {
+    //JNI c代码可以修改class中的成员变量
     private int age = 20;
 
     static{
