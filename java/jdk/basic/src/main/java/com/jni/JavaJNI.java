@@ -8,7 +8,7 @@ package com.jni;
  * java com.jni.JavaJNI
  */
 public class JavaJNI {
-    public int age = 20;
+    private int age = 20;
 
     static{
         System.load("/home/kaige/work/research/learning/java/jdk/basic/src/main/java/javajni.so");
