@@ -9,7 +9,7 @@ package com.jni;
  */
 public class JavaJNI {
     static{
-        System.load("/home/k/work/research/learning/java/jdk/basic/src/main/java/javajni.so");
+        System.load("/home/kaige/work/research/learning/java/jdk/basic/src/main/java/javajni.so");
     }
 
     public static void main(String[] args)
