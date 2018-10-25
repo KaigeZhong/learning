@@ -1,4 +1,4 @@
-package com.thread.sync;
+package com.thread.self.status;
 
 import java.util.concurrent.locks.LockSupport;
 
