@@ -1,4 +1,4 @@
-package com;
+package com.thread.sync;
 
 import java.util.concurrent.locks.LockSupport;
 
@@ -9,18 +9,19 @@ import java.util.concurrent.locks.LockSupport;
  */
 public class LockSupportL {
     public static void main(String[] args) {
-        final Object obj = new Object();
+        Thread mainThread = Thread.currentThread();
         Thread A = new Thread(() -> {
-            int sum = 0;
-            for(int i=0;i<10;i++){
-                sum+=i;
+            System.out.println("子线程");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            LockSupport.park();
-            System.out.println(sum);
+            //多次调用unpark的效果和调用一次unpark的效果一样
+            LockSupport.unpark(mainThread);
         });
         A.start();
-        //Thread.sleep(1000);
-        //多次调用unpark的效果和调用一次unpark的效果一样
-        LockSupport.unpark(A);
+        LockSupport.park();
+        System.out.println("主线程");
     }
 }
