@@ -3,19 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>spring-cloud-eureka</artifactId>
+        <artifactId>spring-cloud-eureka-consumer</artifactId>
         <groupId>spring-learning</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-cloud-eureka-consumer</artifactId>
+    <artifactId>consumer-with-hystrix</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>consumer-based-on-feign-ribbon</module>
-        <module>consumer-based-on-restTemplate-ribbon</module>
-        <module>consumer-with-hystrix</module>
-    </modules>
 
+    <modules>
+        <module>consumer-based-on-feign-ribbon-with-hystrix</module>
+        <module>consumer-based-on-restTemplate-ribbon-with-hystrix</module>
+    </modules>
 
 </project>
