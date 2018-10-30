@@ -1,0 +1,35 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: spring-cloud-zuul
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    #不进行注册，表明只是一个consumer
+    register-with-eureka: false
+#
+#zuul:
+#  routes:
+#    users: /myusers/**
+#等价于
+#zuul:
+#  routes:
+#    api-a:
+#      path: /myusers/**
+#      serviceId: users
+#
+#that HTTP calls to /myusers get forwarded to the users service (for example /myusers/101 is forwarded to /101).
+#
+zuul:
+  routes:
+    api-a:
+      path: /spring-cloud-eureka-provider-a/**
+      serviceId: spring-cloud-eureka-provider-a
+    api-b:
+      path: /spring-cloud-eureka-provider-b/**
+      serviceId: spring-cloud-eureka-provider-b

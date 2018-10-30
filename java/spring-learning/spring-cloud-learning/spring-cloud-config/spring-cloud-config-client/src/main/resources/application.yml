@@ -1,5 +1,11 @@
 foo: localDefaultValue
-testKey: testDefaultValue
-customKey: customDefaultValue
+genericKey: testDefaultValue
+applicationKey: customDefaultValue
 server:
   port: 8088
+#http://localhost:8088/actuator/refresh,手动刷新配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh

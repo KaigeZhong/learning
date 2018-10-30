@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: spring-cloud-eureka-provider
+    name: spring-cloud-eureka-provider-b
 
 
 eureka:

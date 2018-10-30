@@ -12,9 +12,11 @@ public class SampleCtrl {
 
     @Value("${server.port}")
     String port;
+    @Value("${spring.application.name}")
+    String applicationName;
 
     @RequestMapping("/provider")
     public String home() throws UnknownHostException {
-        return "from: " + InetAddress.getLocalHost().getHostAddress() + ":" + port;
+        return "from: " + InetAddress.getLocalHost().getHostAddress() + ":" + port + " -> service: " + applicationName;
     }
 }

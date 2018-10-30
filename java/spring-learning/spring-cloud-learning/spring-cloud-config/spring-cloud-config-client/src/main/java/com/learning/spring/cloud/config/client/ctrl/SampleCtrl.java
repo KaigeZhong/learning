@@ -10,18 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SampleCtrl implements ApplicationContextAware {
+    /**
+     * config 的配置更新，需要手动刷新每一个服务
+     * http://localhost:8088/actuator/refresh
+     */
     private String foo;
-    private String testKey;
+    private String genericKey;
     private String bootKey;
-    private String customKey;
+    private String applicationKey;
     private ApplicationContext context;
 
-    @RequestMapping("/")
-    public String testKeyValue() {
-        String testValue = value("testKey");
-        return testValue;
-    }
-    @RequestMapping("/{key}")
+    @RequestMapping("/config/{key}")
     public String value(@PathVariable String key) {
         /**
          * bootstrap.yml存在父context的Environment里
@@ -37,9 +36,9 @@ public class SampleCtrl implements ApplicationContextAware {
         this.foo = foo;
     }
 
-    @Value("${testKey}")
-    public void setTestKey(String testKey) {
-        this.testKey = testKey;
+    @Value("${genericKey}")
+    public void setGenericKey(String genericKey) {
+        this.genericKey = genericKey;
     }
 
     @Value("${bootKey}")
@@ -47,9 +46,9 @@ public class SampleCtrl implements ApplicationContextAware {
         this.bootKey = bootKey;
     }
 
-    @Value("${customKey}")
-    public void setCustomKey(String customKey) {
-        this.customKey = customKey;
+    @Value("${applicationKey}")
+    public void setApplicationKey(String applicationKey) {
+        this.applicationKey = applicationKey;
     }
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

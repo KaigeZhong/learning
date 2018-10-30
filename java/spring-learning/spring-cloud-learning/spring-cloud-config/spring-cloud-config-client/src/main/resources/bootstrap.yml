@@ -3,5 +3,5 @@ spring:
     config:
       uri: http://localhost:8888
 foo: localBootStrapValue
-testKey: testBootStrapValue
+genericKey: testBootStrapValue
 bootKey: bootStrapValue
