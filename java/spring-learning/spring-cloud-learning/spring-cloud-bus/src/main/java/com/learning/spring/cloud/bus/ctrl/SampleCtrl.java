@@ -1,10 +1,12 @@
 package com.learning.spring.cloud.bus.ctrl;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RefreshScope
 public class SampleCtrl {
     /**
      * config 的配置更新，需要手动刷新每一个服务

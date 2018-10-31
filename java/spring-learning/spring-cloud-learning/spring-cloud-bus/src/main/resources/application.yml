@@ -1,5 +1,5 @@
 server:
-  port: 8089
+  port: 8088
 #http://localhost:8088/actuator/bus-refresh,手动刷新配置（post请求）
 #http://localhost:8088/actuator可以查看开启了哪些功能（get请求）
 management:
