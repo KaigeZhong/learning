@@ -10,5 +10,4 @@ spring:
   application:
     name: spring-cloud-bus
   kafka:
-    bootstrap-servers:
-
+    bootstrap-servers: localhost:9092
