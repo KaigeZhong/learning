@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+//当采用bus-refresh时是需要@RefreshScope注解的，而采用普通refresh不需要
 @RefreshScope
 public class SampleCtrl {
     /**
