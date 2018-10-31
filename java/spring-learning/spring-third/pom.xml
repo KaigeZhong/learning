@@ -17,6 +17,8 @@
         <module>validate</module>
         <module>swagger</module>
         <module>json</module>
+        <module>kafka</module>
+        <module>scheduled</module>
     </modules>
 
     <dependencyManagement>

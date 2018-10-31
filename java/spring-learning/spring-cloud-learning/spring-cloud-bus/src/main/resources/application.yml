@@ -1,0 +1,14 @@
+server:
+  port: 8088
+#http://localhost:8088/actuator/bus-refresh,手动刷新配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+spring:
+  application:
+    name: spring-cloud-bus
+  kafka:
+    bootstrap-servers:
+

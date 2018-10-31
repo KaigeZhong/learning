@@ -1,0 +1,2 @@
+#最后一行的第一列
+awk 'END{print $1}' /etc/hosts
