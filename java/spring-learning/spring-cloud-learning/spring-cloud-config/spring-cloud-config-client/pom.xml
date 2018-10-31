@@ -22,6 +22,8 @@
         </dependency>
         <!--用于手动刷新配置
         http://localhost:8088/actuator/refresh
+        但仍然需要分别手动调用所有config client才能实现所有client配置更新
+
         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

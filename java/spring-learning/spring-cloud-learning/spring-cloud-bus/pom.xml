@@ -32,6 +32,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <!--
+        actuator + bus 可实现自动刷新，我们只需要在一台config client上手动执行刷新配置动作，该client会通过bus 消息队列通知其他client更新这样就实现了自动刷新其他config client配置
+        -->
 
         <!--rabbitmq-->
         <!--<dependency>-->

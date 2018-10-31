@@ -8,6 +8,6 @@ management:
         include: bus-refresh
 spring:
   application:
-    name: spring-cloud-bus
+    name: springcloudbus
   kafka:
     bootstrap-servers: localhost:9092
