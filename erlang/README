@@ -1,0 +1,6 @@
+编译程序。
+
+$ erlc helloworld.erl
+运行程序。
+
+$ erl -noshell -s helloworld start -s init stop
