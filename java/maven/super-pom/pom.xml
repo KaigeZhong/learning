@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>maven</artifactId>
+        <groupId>maven</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>super-pom</artifactId>
+
+
+    <!--supper pom 文件位置：
+    ${M2_HOME}/lib/maven-model-builder-3.0.4.jar，打开该文件，能找到超级POM：\org\apache\maven\model\pom-4.0.0.xml
+    -->
+
+    <!--
+    pom 4.0.0 version
+
+    -->
+</project>

@@ -17,6 +17,8 @@
         <module>jar</module>
         <module>java-version</module>
         <module>check-style</module>
+        <module>super-pom</module>
+        <module>repositories</module>
     </modules>
 
 

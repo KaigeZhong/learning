@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>maven</artifactId>
+        <groupId>maven</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>repositories</artifactId>
+
+
+    <!--
+    运行Maven的时候，Maven所需要的任何构件都是直接从本地仓库获取的。
+    如果本地仓库没有，它会首先尝试从远程仓库下载构件至本地仓库，然后再使用本地仓库的构件。
+
+    本地仓库：
+    . Maven缺省的本地仓库地址为${user.home}/.m2/repository
+    . 自定义本地仓库的位置，修改${user.home}/.m2/settings.xml
+      <localRepository>D:/.m2/repository</localRepository>
+    . 还可以在运行时指定本地仓库位置：
+        mvn clean install -Dmaven.repo.local=/home/juven/myrepo/
+
+    远程仓库:
+    . Maven的缺省
+    -->
+</project>
