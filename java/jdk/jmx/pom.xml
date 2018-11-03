@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>http</module>
+        <module>rmi</module>
     </modules>
 
 

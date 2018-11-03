@@ -3,17 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>maven</artifactId>
-        <groupId>maven</groupId>
+        <artifactId>jmx</artifactId>
+        <groupId>jdk</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>setting</artifactId>
+    <artifactId>rmi</artifactId>
 
 
-    <!--maven的setting在${MAVEN_HOME}/conf/setting.xml
-
-    已将setting的sample放置到了当前目录下，可以参考
-    -->
 </project>

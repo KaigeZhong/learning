@@ -12,17 +12,18 @@
     <artifactId>http</artifactId>
 
     <dependencies>
+        <!--
+        jmxtools属于oracle的，没法从中央仓库下载，所以先将jar包下载到本地，然后执行下面的命令将jar包安装到本地仓库
+
+        mvn install:install-file -Dfile=/home/kaige/work/research/learning/java/jdk/jmx/http/src
+        /jmxtools-1.2.1.jar -DgroupId=com.sun.jdmk -DartifactId=jmxtools -Dversion=1.2.1
+        -Dpackaging=jar
+        -->
         <dependency>
             <groupId>com.sun.jdmk</groupId>
             <artifactId>jmxtools</artifactId>
             <version>1.2.1</version>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>jboss</id>
-            <url>http://repository.jboss.org/maven2/</url>
-        </repository>
-    </repositories>
 
 </project>

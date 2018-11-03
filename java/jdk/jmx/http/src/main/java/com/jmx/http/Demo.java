@@ -1,12 +1,12 @@
-package jmx;
+package com.jmx.http;
 
-public class DemoMBeanImp implements DemoMBean {
+public class Demo implements DemoMBean {
     private String greeting;
 
-    public DemoMBeanImp(String greeting) {
+    public Demo(String greeting) {
         this.greeting = greeting;
     }
-    public DemoMBeanImp() {
+    public Demo() {
         this("hello world!");
     }
     public String getGreeting() {
