@@ -1,7 +1,7 @@
 
 vi /etc/docker/daemon.json
 {
-“registry-mirrors”: [“https://registry.docker-cn.com“]
+"registry-mirrors": ["https://registry.docker-cn.com"]
 }
 ##然后重启docker
 ##在国内，可以通过registry.docker-cn.com访问官方镜像库，目前该镜像库只包含流行的公有镜像，而私有镜像仍需要从美国镜像库中拉取。

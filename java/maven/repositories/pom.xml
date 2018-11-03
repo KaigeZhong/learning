@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>repositories</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>repositories-child</module>
+    </modules>
 
 
     <!--
@@ -24,6 +28,43 @@
         mvn clean install -Dmaven.repo.local=/home/juven/myrepo/
 
     远程仓库:
-    . Maven的缺省
+    . 通过repositories设置远程仓库
+    . Maven的缺省远程仓库是super pom中的central中央仓库
+    . 搜索顺序：1. 先child pom中的repositories仓库列表，搜索不到再搜索parentpom
+              2. 按照pom的repositories中的仓库列表顺序搜索
+      当id相同时，child pom的同一个repository会覆盖parent中的，例如仓库id设置成central会覆盖super pom默认的中央仓库配置
+
     -->
+
+
+    <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>custom.kg</groupId>-->
+            <!--<artifactId>custom.kg</artifactId>-->
+            <!--<version>1.1</version>-->
+        <!--</dependency>-->
+    </dependencies>
+
+    <!--指定获取依赖的远程仓库列表-->
+    <repositories>
+
+        <!--远程-->
+        <repository>
+            <!--搜索顺序: oschina, sonatype, aliyun, jboss, central-->
+            <id>aliyun</id>
+            <!--如果仓库id设置成central会覆盖super pom默认的中央仓库配置-->
+            <!--搜索顺序: oschina, sonatype, central, jboss-->
+            <!--<id>central</id>-->
+            <name>aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+
+        <repository>
+            <id>jboss</id>
+            <name>jbos</name>
+            <url>http://repository.jboss.com/maven2/</url>
+        </repository>
+
+
+    </repositories>
 </project>

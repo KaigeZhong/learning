@@ -9,11 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>super-pom</artifactId>
+    <artifactId>setting</artifactId>
 
-
-    <!--supper pom 文件位置：
-    ${M2_HOME}/lib/maven-model-builder-3.0.4.jar，打开该文件，能找到超级POM：\org\apache\maven\model\pom-4.0.0.xml
-    -->
 
 </project>

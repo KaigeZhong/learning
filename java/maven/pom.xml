@@ -19,6 +19,8 @@
         <module>check-style</module>
         <module>super-pom</module>
         <module>repositories</module>
+        <module>setting</module>
+        <module>repositories-distribution</module>
     </modules>
 
 
