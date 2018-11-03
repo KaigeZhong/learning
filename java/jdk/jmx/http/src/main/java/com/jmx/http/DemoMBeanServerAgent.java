@@ -19,6 +19,9 @@ public class DemoMBeanServerAgent {
     startHtmlAdaptorServer();
   }
 
+
+
+  //客户端通过http访问，http://localhost:9092
   public void startHtmlAdaptorServer() {
     HtmlAdaptorServer htmlAdaptorServer = new HtmlAdaptorServer();
     ObjectName adapterName = null;
@@ -34,7 +37,7 @@ public class DemoMBeanServerAgent {
   }
 
   public static void main(String args[]) throws Exception {
-    System.out.println(" hello agent is running");
     DemoMBeanServerAgent agent = new DemoMBeanServerAgent();
+    System.out.println(" hello agent is running");
   }
 }
