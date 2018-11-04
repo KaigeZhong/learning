@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zipkin</artifactId>
+        <groupId>spring-learning</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>zipkin-server</artifactId>
+
+    <!--openzipkin/zipkin是java编写，如果我们看其源码的话，会发现其本身就是基于spring boot的web项目-->
+
+    <!--
+    spring Cloud为F版本的时候，已经不需要自己构建Zipkin Server了，只需要下载jar。在这里我们采用docker搭建
+    -->
+
+</project>

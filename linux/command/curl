@@ -7,3 +7,19 @@ curl -X GET http://localhost:8080/search\?data=123
 #post请求
 curl -X POST -d"data=123&key=456" http://localhost:8080/search
 curl -H "Content-Type:application/json" -d '{"data":"123","key":"456"}' http://localhost:8080/search
+
+
+
+### -f, --failed. 当类似与404错误时，服务端会返回html文档来描述错误信息，-f的作用就是curl不会输出这些错误信息
+### -s 不显示curl进程本身的输出
+### -S 显示错误信息
+### -L, --location 跟随链接重定向
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+
+
+
+## -o, --output. 用于下载，把response body保存到文件当中。只会保存body，不会保存head。相当于wget
+curl -o index.html  www.baidu.com
+## -O 也用于下载，会把远程的资源名作为本地保存的文件名
+curl -O https://download.docker.com/linux/ubuntu/gpg

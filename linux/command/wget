@@ -1,0 +1,4 @@
+
+## -q quiet不显示weget本身的输出
+## -O 指定输出位置 - 表示标准输入输出
+wget -q -O - http://mirrors.hust.edu.cn/apache/zookeeper/stable/zookeeper-${ZK_VERSION}.tar.gz | tar -xzf - -C /opt

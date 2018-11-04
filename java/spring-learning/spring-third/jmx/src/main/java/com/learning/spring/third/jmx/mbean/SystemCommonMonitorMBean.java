@@ -1,11 +1,11 @@
 package com.learning.spring.third.jmx.mbean;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 @ManagedResource(objectName = "monitor:name=SystemCommonMonitor")
 public class SystemCommonMonitorMBean {
 

@@ -24,6 +24,7 @@
         <module>spring-cloud-config</module>
         <module>spring-cloud-netflix</module>
         <module>spring-cloud-bus</module>
+        <module>spring-cloud-sleuth</module>
     </modules>
 
     <dependencyManagement>

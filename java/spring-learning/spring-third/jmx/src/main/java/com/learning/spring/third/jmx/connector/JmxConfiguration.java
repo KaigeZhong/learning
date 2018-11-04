@@ -7,7 +7,7 @@ import org.springframework.jmx.support.ConnectorServerFactoryBean;
 import org.springframework.remoting.rmi.RmiRegistryFactoryBean;
 
 @Configuration
-public class JmxAutoConfiguration {
+public class JmxConfiguration {
 
   // 指定特定端口可以开放命名服务
   @Bean
