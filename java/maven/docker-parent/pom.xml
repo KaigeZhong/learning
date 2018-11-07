@@ -23,6 +23,9 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <!--此插件是基于dockerfile-maven
+                    spotify建议使用dockerfile-maven，而docker-maven-plugin已不再更新
+                    -->
                     <groupId>com.spotify</groupId>
                     <artifactId>dockerfile-maven-plugin</artifactId>
                     <version>${dockerfile-maven-plugin.version}</version>
@@ -31,12 +34,20 @@
                             <id>default</id>
                             <goals>
                                 <goal>build</goal>
-                                <goal>push</goal>
                             </goals>
                         </execution>
                     </executions>
                     <configuration>
+                        <!--
+                        docker build -t=name:tag
+                        相当于name:tag中的tag
+                        -->
                         <tag>${project.version}</tag>
+                        <!--相当于docker build的build-args参数
+                       需要注意的是采取build-args定义的参数是需要在dockerfile文件中定义对应的相同名字的arg来接收build-args参数
+                       所以这里我们需要在dockerfile加入ARG JAR_FILE
+
+                        -->
                         <buildArgs>
                             <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                         </buildArgs>

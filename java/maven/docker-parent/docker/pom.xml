@@ -16,7 +16,17 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <configuration>
+                    <!--
+                    docker build -t=name:tag
+                        相当于name:tag中的name
+                    -->
                     <repository>mine/docker-app</repository>
+                    <!--
+                    contextDirectory: docker build 的context目录,如果不配置默认为project.basedir
+                    插件不支持dockerfile文件放到其他目录，只能放在contextDirectory下面。源码:
+                    new File(contextDirectory, "Dockerfile")
+                    -->
+                    <contextDirectory>${project.basedir}</contextDirectory>
                 </configuration>
             </plugin>
 
