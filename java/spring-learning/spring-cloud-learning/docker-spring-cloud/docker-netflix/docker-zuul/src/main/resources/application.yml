@@ -1,0 +1,34 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: zuul
+
+
+#注册并消费eureka
+eureka:
+  client:
+    serviceUrl:
+#eureka的地址为docker容器名
+      defaultZone: http://eureka-server:8761/eureka/
+
+
+#
+#zuul:
+#  routes:
+#    users: /mypath/**
+#等价于
+#zuul:
+#  routes:
+#    api-a:
+#      path: /mypath/**
+#      serviceId: users
+#
+#that HTTP calls to /myusers get forwarded to the users service (for example /myusers/101 is forwarded to /101).
+#
+zuul:
+  routes:
+    application-a: /application-a/**
+    application-b: /application-b/**
+    application-c: /application-c/**

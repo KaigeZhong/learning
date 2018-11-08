@@ -1,0 +1,54 @@
+version: "3"
+services:
+  eureka-server:
+    image: docker-spring-cloud/docker-eureka-server:1.0-SNAPSHOT
+    container_name: eureka-server
+    ports:
+      - 8761:8761
+    networks:
+      - net_spring_cloud
+
+  zuul:
+      image: docker-spring-cloud/docker-zuul:1.0-SNAPSHOT
+      container_name: zuul
+      ports:
+        - 8091:8091
+      networks:
+        - net_spring_cloud
+      depends_on:
+        - eureka-server
+
+  application-a:
+      image: docker-spring-cloud/application-a:1.0-SNAPSHOT
+      container_name: application-a
+      ports:
+        - 8081:8081
+      networks:
+        - net_spring_cloud
+      depends_on:
+        - eureka-server
+
+
+  application-b:
+      image: docker-spring-cloud/application-b:1.0-SNAPSHOT
+      container_name: application-b
+      ports:
+        - 8082:8082
+      networks:
+        - net_spring_cloud
+      depends_on:
+        - eureka-server
+
+  application-c:
+      image: docker-spring-cloud/application-c:1.0-SNAPSHOT
+      container_name: application-c
+      ports:
+        - 8083:8083
+      networks:
+        - net_spring_cloud
+      depends_on:
+        - eureka-server
+
+networks:
+  net_spring_cloud:
+    driver: bridge

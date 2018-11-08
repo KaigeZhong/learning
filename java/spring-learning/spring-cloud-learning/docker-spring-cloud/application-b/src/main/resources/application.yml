@@ -1,0 +1,14 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: application-b
+
+
+eureka:
+  client:
+    serviceUrl:
+#eureka的地址为docker容器名
+      defaultZone: http://eureka-server:8761/eureka/
+

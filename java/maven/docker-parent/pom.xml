@@ -43,6 +43,15 @@
                         相当于name:tag中的tag
                         -->
                         <tag>${project.version}</tag>
+
+                        <!--
+                            docker build -t=name:tag
+                            相当于name:tag中的name
+
+                            project.artifactId的读取会是在实际插件配置的地方,这里读取到的是docker而不是docker-parent
+                        -->
+                        <repository>mine/${project.artifactId}</repository>
+
                         <!--相当于docker build的build-args参数
                        需要注意的是采取build-args定义的参数是需要在dockerfile文件中定义对应的相同名字的arg来接收build-args参数
                        所以这里我们需要在dockerfile加入ARG JAR_FILE

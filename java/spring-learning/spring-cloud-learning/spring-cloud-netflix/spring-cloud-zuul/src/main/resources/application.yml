@@ -15,12 +15,12 @@ eureka:
 #
 #zuul:
 #  routes:
-#    users: /myusers/**
+#    users: /mypath/**
 #等价于
 #zuul:
 #  routes:
 #    api-a:
-#      path: /myusers/**
+#      path: /mypath/**
 #      serviceId: users
 #
 #that HTTP calls to /myusers get forwarded to the users service (for example /myusers/101 is forwarded to /101).
