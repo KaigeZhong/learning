@@ -18,6 +18,16 @@ services:
       depends_on:
         - eureka-server
 
+  config-server:
+      image: docker-spring-cloud/docker-config-server:1.0-SNAPSHOT
+      container_name: config-server
+      ports:
+        - 8101:8101
+      networks:
+        - net_spring_cloud
+      depends_on:
+        - eureka-server
+
   application-a:
       image: docker-spring-cloud/application-a:1.0-SNAPSHOT
       container_name: application-a

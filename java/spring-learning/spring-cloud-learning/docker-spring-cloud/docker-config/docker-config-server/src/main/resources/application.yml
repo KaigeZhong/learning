@@ -1,6 +1,11 @@
 server:
   port: 8101
 
+eureka:
+  client:
+    serviceUrl:
+#eureka的地址为docker容器名
+      defaultZone: http://eureka-server:8761/eureka/
 spring:
   cloud:
     config:
@@ -8,3 +13,5 @@ spring:
         git:
           uri: https://github.com/KaigeZhong/learning
           searchPaths: /java/spring-learning/spring-cloud-learning/docker-spring-cloud/docker-config/docker-config-server/src/main/config/{application}
+  application:
+    name: config-server

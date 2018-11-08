@@ -32,3 +32,4 @@ zuul:
     application-a: /application-a/**
     application-b: /application-b/**
     application-c: /application-c/**
+    config-server: /config-server/**
