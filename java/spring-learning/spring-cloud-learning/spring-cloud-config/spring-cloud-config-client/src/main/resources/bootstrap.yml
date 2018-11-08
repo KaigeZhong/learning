@@ -1,3 +1,19 @@
+#
+#如果采用服务发现那么spring config的配置和eureka的配置必须放在bootstrap中
+#spring:
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        service-id: config-server
+#
+#eureka:
+#  client:
+#    serviceUrl:
+##eureka的地址为docker容器名
+#      defaultZone: http://eureka-server:8761/eureka/
+
+
 spring:
   cloud:
     config:

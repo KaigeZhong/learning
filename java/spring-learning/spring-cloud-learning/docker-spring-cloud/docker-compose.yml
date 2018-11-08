@@ -37,6 +37,7 @@ services:
         - net_spring_cloud
       depends_on:
         - eureka-server
+        - config-server
 
 
   application-b:
@@ -48,6 +49,7 @@ services:
         - net_spring_cloud
       depends_on:
         - eureka-server
+        - config-server
 
   application-c:
       image: docker-spring-cloud/application-c:1.0-SNAPSHOT
@@ -58,6 +60,7 @@ services:
         - net_spring_cloud
       depends_on:
         - eureka-server
+        - config-server
 
 networks:
   net_spring_cloud:

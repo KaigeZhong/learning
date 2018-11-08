@@ -4,10 +4,3 @@ server:
 spring:
   application:
     name: application-a
-
-
-eureka:
-  client:
-    serviceUrl:
-#eureka的地址为docker容器名
-      defaultZone: http://eureka-server:8761/eureka/

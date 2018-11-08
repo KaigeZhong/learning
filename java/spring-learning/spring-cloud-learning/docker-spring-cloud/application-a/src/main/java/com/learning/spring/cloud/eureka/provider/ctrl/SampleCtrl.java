@@ -8,10 +8,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class SampleCtrl {
 
     @Value("${spring.application.name}")
-    String applicationName;
+    private String applicationName;
+    @Value("${foo}")
+    private String foo;
 
     @RequestMapping("/")
     public String info() {
         return "this is " + applicationName;
+    }
+
+    @RequestMapping("/config")
+    public String config() {
+        return "foo: " + foo;
     }
 }
