@@ -4,3 +4,6 @@ server:
 spring:
   application:
     name: application-a
+  zipkin:
+##docker 容器名字
+    base-url: http://zipkin-server:9411

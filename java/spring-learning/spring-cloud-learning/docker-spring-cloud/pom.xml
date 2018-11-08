@@ -17,6 +17,7 @@
         <module>application-b</module>
         <module>application-c</module>
         <module>docker-config</module>
+        <module>docker-sleuth</module>
     </modules>
 
     <dependencyManagement>

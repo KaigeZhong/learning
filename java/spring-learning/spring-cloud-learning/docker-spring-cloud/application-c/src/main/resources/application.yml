@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: application-c
+  zipkin:
+##docker 容器名字
+    base-url: http://zipkin-server:9411
 
 
 eureka:

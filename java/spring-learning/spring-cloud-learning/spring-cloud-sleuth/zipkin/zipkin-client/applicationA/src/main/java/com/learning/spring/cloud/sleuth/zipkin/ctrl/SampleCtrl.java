@@ -10,16 +10,8 @@ public class SampleCtrl {
   @Autowired
   private RestTemplate restTemplate;
 
-
-
-  @RequestMapping("/hi")
-  public String callHome(){
-    return restTemplate.getForObject("http://localhost:8989/miya", String.class);
+  @RequestMapping("/zipkin")
+  public String zipkin(){
+    return restTemplate.getForObject("http://localhost:8989/zipkin", String.class);
   }
-  @RequestMapping("/info")
-  public String info(){
-    return "i'm service-A";
-
-  }
-
 }

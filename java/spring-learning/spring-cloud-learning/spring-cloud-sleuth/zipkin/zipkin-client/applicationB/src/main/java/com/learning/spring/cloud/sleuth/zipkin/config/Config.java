@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class Config {
+  //只是配置restTemplate与zipkin无关
   @Bean
   public RestTemplate getRestTemplate(){
     return new RestTemplate();

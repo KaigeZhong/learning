@@ -21,4 +21,10 @@ public class SampleCtrl {
     public String config() {
         return "foo: " + foo;
     }
+
+
+    @RequestMapping("/zipkin")
+    public String zipKinTrace() {
+        return "zipkin result";
+    }
 }

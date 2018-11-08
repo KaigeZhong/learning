@@ -28,6 +28,14 @@ services:
       depends_on:
         - eureka-server
 
+  zipkin-server:
+      image: docker-spring-cloud/docker-zipkin-server:1.0-SNAPSHOT
+      container_name: zipkin-server
+      ports:
+        - 9411:9411
+      networks:
+        - net_spring_cloud
+
   application-a:
       image: docker-spring-cloud/application-a:1.0-SNAPSHOT
       container_name: application-a

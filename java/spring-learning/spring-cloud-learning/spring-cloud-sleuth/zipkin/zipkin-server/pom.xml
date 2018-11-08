@@ -16,5 +16,16 @@
     <!--
     spring Cloud为F版本的时候，已经不需要自己构建Zipkin Server了，只需要下载jar。在这里我们采用docker搭建
     -->
+    <dependencies>
+        <dependency>
+            <groupId>io.zipkin.java</groupId>
+            <artifactId>zipkin-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zipkin.java</groupId>
+            <artifactId>zipkin-autoconfigure-ui</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
 
 </project>

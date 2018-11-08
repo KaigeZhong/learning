@@ -12,14 +12,9 @@ public class SampleCtrl {
 
 
 
-  @RequestMapping("/miya")
-  public String info(){
-    return restTemplate.getForObject("http://localhost:8988/info",String.class);
-  }
-
-  @RequestMapping("/hi")
-  public String home(){
-    return "hi i'm service-B!";
+  @RequestMapping("/zipkin")
+  public String zipkin(){
+    return "zipkin result";
   }
 
 }
