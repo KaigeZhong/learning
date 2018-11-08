@@ -16,6 +16,7 @@
         <module>application-a</module>
         <module>application-b</module>
         <module>application-c</module>
+        <module>docker-config</module>
     </modules>
 
     <dependencyManagement>
