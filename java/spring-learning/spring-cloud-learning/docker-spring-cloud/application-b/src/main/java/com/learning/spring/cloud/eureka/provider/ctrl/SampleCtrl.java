@@ -29,6 +29,6 @@ public class SampleCtrl {
     private RestTemplate restTemplate;
     @RequestMapping("/zipkin")
     public String zipKinTrace() {
-        return applicationName + "call: " + restTemplate.getForObject("http://application-c/zipkin",String.class);
+        return applicationName + " --> " + restTemplate.getForObject("http://application-c/zipkin",String.class);
     }
 }

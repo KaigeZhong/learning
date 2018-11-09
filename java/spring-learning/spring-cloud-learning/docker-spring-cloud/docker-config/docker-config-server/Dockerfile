@@ -7,4 +7,4 @@ ARG JAR_FILE
 ENV JAR_FILE=${JAR_FILE}
 ADD target/${JAR_FILE} /opt/${JAR_FILE}
 
-CMD ["/bin/bash", "-c", "java -jar /opt/${JAR_FILE}"]
+CMD ["/bin/bash", "-c", "java -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n -jar /opt/${JAR_FILE}"]

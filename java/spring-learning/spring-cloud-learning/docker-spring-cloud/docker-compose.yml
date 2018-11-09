@@ -41,6 +41,7 @@ services:
       container_name: application-a
       ports:
         - 8081:8081
+        - 8000:8000
       networks:
         - net_spring_cloud
       depends_on:
@@ -53,6 +54,7 @@ services:
       container_name: application-b
       ports:
         - 8082:8082
+        - 8001:8000
       networks:
         - net_spring_cloud
       depends_on:
@@ -64,6 +66,7 @@ services:
       container_name: application-c
       ports:
         - 8083:8083
+        - 8002:8000
       networks:
         - net_spring_cloud
       depends_on:
