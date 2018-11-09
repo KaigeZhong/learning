@@ -1,0 +1,8 @@
+version: "3"
+services:
+  zipkin-server:
+    image: zipkin_server_custom:latest
+    container_name: zipkin-server
+    ports:
+      - 9411:9411
+
