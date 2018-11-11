@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class HomeServlet extends HttpServlet {
+public class HeyServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
@@ -15,7 +15,7 @@ public class HomeServlet extends HttpServlet {
 
         System.out.println("request scheme: " + req.getScheme());
 
-        resp.getWriter().print("hello tomcat");
+        resp.getWriter().print("Hey tomcat");
     }
 
 }
