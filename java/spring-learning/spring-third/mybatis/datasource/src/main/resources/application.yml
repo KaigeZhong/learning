@@ -1,0 +1,38 @@
+####################### 连接池配置 ###############
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mybatis?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: mybatis
+    # 从DataSourceConfiguration中可以看到，Spring Boot中默认支持的连接池有dbcp2, tomcat, hikari三种连接池。默认采用hikari
+    # hikari: com.zaxxer.hikari.HikariDataSource
+    # dbcp2: org.apache.commons.dbcp2.BasicDataSource
+    # tomcat: org.apache.tomcat.jdbc.pool.DataSource
+    #
+    # 如果要集成其他连接池，例如druid。我们需要将下面的type改为com.alibaba.druid.pool.DruidDataSource，然后需要去@Bean注入我们的datasource
+    # 在这我们采用spring boot支持的连接池hikari，则不需要去@Bean注入
+    type: com.zaxxer.hikari.HikariDataSource
+    # 因为我们采用的是spring boot支持的连接池hikari，所以我们可以直接在这里进行hikari的配置
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 5
+
+
+
+
+
+
+####################### mybatis配置 ###############
+mybatis:
+  #当使用xml时才需要配置
+  mapper-locations: classpath:sqlmap/*.xml
+  configuration:
+  #配置驼峰转换
+    map-underscore-to-camel-case: true
+
+###################### 日志配置 ################3
+# 打印日志,设置成打印dao层sql语句
+logging:
+  level:
+    com.mybatis.xml.dao: debug

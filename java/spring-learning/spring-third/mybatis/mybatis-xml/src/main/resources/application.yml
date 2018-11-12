@@ -1,0 +1,21 @@
+####################### 连接池配置 ###############
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mybatis?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: mybatis
+
+####################### mybatis配置 ###############
+mybatis:
+  #当使用xml时才需要配置
+  mapper-locations: classpath:sqlmap/*.xml
+  configuration:
+  #配置驼峰转换
+    map-underscore-to-camel-case: true
+
+###################### 日志配置 ################3
+# 打印日志,设置成打印dao层sql语句
+logging:
+  level:
+    com.mybatis.xml.dao: debug
