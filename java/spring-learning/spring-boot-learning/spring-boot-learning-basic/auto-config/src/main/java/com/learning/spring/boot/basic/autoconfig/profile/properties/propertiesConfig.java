@@ -5,11 +5,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+/**
+ * 优先级是profile, default, propertySource
+ */
 @Configuration
 @PropertySource("classpath:propertyResource.properties")
 public class propertiesConfig {
 
   private String testKey;
+  private String customKey;
 
   @Bean
   public PropertiesBean propertiesBean() {
@@ -20,5 +24,10 @@ public class propertiesConfig {
   @Value("${testKey}")
   public void setTestKey(String testKey) {
     this.testKey = testKey;
+  }
+
+  @Value("${customKey}")
+  public void setCustomKey(String customKey) {
+    this.customKey = customKey;
   }
 }

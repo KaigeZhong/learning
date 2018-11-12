@@ -14,13 +14,7 @@
     <modules>
         <module>command-line-runner</module>
         <module>auto-config</module>
+        <module>multi-module-properties</module>
     </modules>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

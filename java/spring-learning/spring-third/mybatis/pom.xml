@@ -15,6 +15,7 @@
     <modules>
         <module>mybatis-annotation</module>
         <module>mybatis-xml</module>
+        <module>datasource</module>
     </modules>
 
 
