@@ -30,7 +30,40 @@ public class TomcatApplication {
      *         "services":[
      *             {
      *                 "connectors":[
-     *
+     *                     {
+     *                         "protocolHandler":{
+     *                             "endpoint":{
+     *                                 "acceptors":[
+     *                                     {
+     *                                         "comments":"acceptor接受连接交给poller的queue中"
+     *                                     }
+     *                                 ],
+     *                                 "pollers":[
+     *                                     {
+     *                                         "comments":"将queue中的连接注册到selector中，并从selector中获取key，交给executor"
+     *                                     }
+     *                                 ],
+     *                                 "executor":{
+     *                                     "comments":"执行new
+     *                                     SocketProcessor（），SocketProcessor会交给handler处理"
+     *                                 },
+     *                                 "handler":{
+     *                                     "comments":"1.
+     *                                     该handler为ConnectionHandler，handler回去创建new
+     *                                     Http11Processor（），然后交给Http11Processor 2.
+     *                                     Http11Processor会执行Http11Processor.process,
+     *                                     Http11Processor.service, 然后调用getAdapter()
+     *                                     .service交给adpater处理，这里的adapter就是
+     *                                     .connectors中的adapter。3.adapter.service会去调用connector
+     *                                     .getService().getContainer().getPipeline().getFirst()
+     *                                     .invoke( request, response);进入容器"
+     *                                 }
+     *                             }
+     *                         },
+     *                         "adapter":{
+     *                             "comments":"该adapter为CoyoteAdapter"
+     *                         }
+     *                     }
      *                 ],
      *                 "engine":{
      *                     "children(host: key,value --> hostname,host)":[
@@ -52,6 +85,8 @@ public class TomcatApplication {
      *         ]
      *     }
      * }
+     *
+     *
      */
 
     /**
