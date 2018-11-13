@@ -6,21 +6,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class Schedule {
     /**
-     * 每5秒钟调用一次执行
+     * 每1秒钟调用一次执行
      * 这个周期是以上一次##完成时间##为基准，在上一个任务完成之后，5s后再次执行
      */
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 1000)
     public void task1() throws InterruptedException {
         Thread.sleep(1000);
+        System.out.println("fixedDelay = 5000");
     }
 
     /**
-     * 每5秒钟调用一次执行
+     * 每1秒钟调用一次执行
      * 这个周期是以上一个任务##开始时间##为基准，从上一任务开始执行后5s再次调用：
      */
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 1000)
     public void task2() throws InterruptedException {
         Thread.sleep(1000);
+        System.out.println("fixedRate = 5000");
     }
 
     /**
