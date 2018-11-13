@@ -20,6 +20,7 @@
         <module>kafka</module>
         <module>scheduled</module>
         <module>jmx</module>
+        <module>redis</module>
     </modules>
 
     <dependencyManagement>

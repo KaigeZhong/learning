@@ -40,7 +40,7 @@ public class TomcatApplication {
      *                                 ],
      *                                 "pollers":[
      *                                     {
-     *                                         "comments":"将queue中的连接注册到selector中，并从selector中获取key，交给executor"
+     *                                         "comments":"1. 将queue中的连接注册到selector中 2. 并从selector中获取key，交给executor"
      *                                     }
      *                                 ],
      *                                 "executor":{

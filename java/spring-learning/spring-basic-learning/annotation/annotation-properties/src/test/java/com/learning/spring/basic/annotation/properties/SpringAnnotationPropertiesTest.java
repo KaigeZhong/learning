@@ -14,5 +14,6 @@ public class SpringAnnotationPropertiesTest {
         BeanByBeanAnnotationPropertySource beanByBeanAnnotation =
                 (BeanByBeanAnnotationPropertySource) ctx.getBean("beanByBeanAnnotationPropertySource");
         System.out.println(beanByBeanAnnotation.getName());
+        System.out.println(beanByBeanAnnotation.getId());
     }
 }
