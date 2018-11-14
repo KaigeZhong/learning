@@ -1,6 +1,6 @@
-package com.learning.spring.third.json.jackson.ctrl;
+package com.learning.spring.third.json.jackson.basic.ctrl;
 
-import com.learning.spring.third.json.jackson.bean.JacksonBean;
+import com.learning.spring.third.json.jackson.basic.bean.JacksonBean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

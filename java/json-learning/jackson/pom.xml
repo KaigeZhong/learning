@@ -14,6 +14,7 @@
     <modules>
         <module>jackson-basic</module>
         <module>jackson-databind</module>
+        <module>java-generics</module>
     </modules>
 
 

@@ -1,4 +1,4 @@
-package com.learning.spring.third.json.jackson.bean;
+package com.learning.spring.third.json.jackson.basic.bean;
 
 public class JacksonBean {
     private Integer jId;

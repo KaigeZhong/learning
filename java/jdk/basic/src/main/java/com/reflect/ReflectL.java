@@ -2,17 +2,17 @@ package com.reflect;
 
 import com.reflect.bean.ReflectBean;
 import jdk.nashorn.internal.runtime.logging.Logger;
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import javax.annotation.Resource;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
+import java.sql.Ref;
 import java.util.Arrays;
 
 public class ReflectL {
     public static void main(String[] args) throws Exception {
+
         System.out.println("################# 构造器 ################");
         Constructor<ReflectBean> defaultDeclaredConstructor = ReflectBean.class.getDeclaredConstructor();
         ReflectBean reflectBeanByDefaultConstructor = defaultDeclaredConstructor.newInstance();
@@ -25,11 +25,9 @@ public class ReflectL {
         System.out.println(Arrays.toString(declaredAllFiled));
 
 
-
         System.out.println("################## class ##############");
         Class<?>[] declaredClasses = ReflectBean.class.getDeclaredClasses();
         System.out.println(Arrays.toString(declaredClasses));
-
 
 
         System.out.println("################## annotation ##########");
@@ -44,15 +42,23 @@ public class ReflectL {
         Resource resource = name.getDeclaredAnnotation(Resource.class);
         System.out.println(resource);
 
+        System.out.println("################## GenericType 泛型类型 ###############");
+        //TypeVariable: T t
+        System.out.println(ReflectBean.class.getDeclaredField("t").getGenericType());
+        System.out.println(ReflectBean.class.getDeclaredField("t").getGenericType().getClass());
+        System.out.println(ReflectBean.class.getDeclaredField("t").getType());
+        //ParameterizedType: List<Child> children
+        System.out.println(ReflectBean.class.getDeclaredField("children").getGenericType());
+        System.out.println(ReflectBean.class.getDeclaredField("children").getGenericType().getClass());
+        System.out.println(((ParameterizedTypeImpl)ReflectBean.class.getDeclaredField("children").getGenericType()).getActualTypeArguments()[0]);
+        System.out.println(((ParameterizedTypeImpl)ReflectBean.class.getDeclaredField("children").getGenericType()).getRawType());
+        System.out.println(ReflectBean.class.getDeclaredField("children").getType());
+        //WildcardType
+        System.out.println(ReflectBean.class.getDeclaredField("numbers").getGenericType());
+        System.out.println(ReflectBean.class.getDeclaredField("numbers").getGenericType().getClass());
+        System.out.println(((ParameterizedTypeImpl)ReflectBean.class.getDeclaredField("numbers").getGenericType()).getActualTypeArguments()[0]);
+        System.out.println(((WildcardType)((ParameterizedTypeImpl)ReflectBean.class.getDeclaredField("numbers").getGenericType()).getActualTypeArguments()[0]).getUpperBounds()[0]);
 
-
-        System.out.println("################## 获取所有和指定对象 #######");
-        //所有
-        Field[] declaredFields = ReflectBean.class.getDeclaredFields();
-        System.out.println(Arrays.toString(declaredFields));
-        //指定
-        Field declaredName = ReflectBean.class.getDeclaredField("name");
-        System.out.println(declaredName);
 
 
 
@@ -81,9 +87,9 @@ public class ReflectL {
         System.out.println(getInnerName.isAccessible());
 
 
-
         System.out.println("############## 通过反射设置private对象的accessible并调用 #########*");
         //field
+        Field declaredName = ReflectBean.class.getDeclaredField("name");
         ReflectBean reflectBean = new ReflectBean();
         declaredName.setAccessible(true);
         declaredName.set(reflectBean, "myNameByPrivateSetMethod");
