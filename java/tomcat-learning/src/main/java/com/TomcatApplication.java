@@ -35,28 +35,20 @@ public class TomcatApplication {
      *                             "endpoint":{
      *                                 "acceptors":[
      *                                     {
-     *                                         "comments":"acceptor接受连接交给poller的queue中"
+     *                                         "comments":"acceptor接受连接交给poller的queue中，因为accptors和pollers都在endpoint中，所以poller和endpoint相互可见"
      *                                     }
      *                                 ],
      *                                 "pollers":[
      *                                     {
+     *                                         "events":"queue接收来至于acceptors的新连接",
      *                                         "comments":"1. 将queue中的连接注册到selector中 2. 并从selector中获取key，交给executor"
      *                                     }
      *                                 ],
      *                                 "executor":{
-     *                                     "comments":"执行new
-     *                                     SocketProcessor（），SocketProcessor会交给handler处理"
+     *                                     "comments":"执行new SocketProcessor（），SocketProcessor会交给handler处理"
      *                                 },
      *                                 "handler":{
-     *                                     "comments":"1.
-     *                                     该handler为ConnectionHandler，handler回去创建new
-     *                                     Http11Processor（），然后交给Http11Processor 2.
-     *                                     Http11Processor会执行Http11Processor.process,
-     *                                     Http11Processor.service, 然后调用getAdapter()
-     *                                     .service交给adpater处理，这里的adapter就是
-     *                                     .connectors中的adapter。3.adapter.service会去调用connector
-     *                                     .getService().getContainer().getPipeline().getFirst()
-     *                                     .invoke( request, response);进入容器"
+     *                                     "comments":"1. 该handler为ConnectionHandler，handler回去创建new Http11Processor（），然后交给Http11Processor 2. Http11Processor会执行Http11Processor.process, Http11Processor.service, 然后调用getAdapter() .service交给adpater处理，这里的adapter就是 .connectors中的adapter。3.adapter.service会去调用connector .getService().getContainer().getPipeline().getFirst() .invoke( request, response);进入容器"
      *                                 }
      *                             }
      *                         },
@@ -85,8 +77,6 @@ public class TomcatApplication {
      *         ]
      *     }
      * }
-     *
-     *
      */
 
     /**
