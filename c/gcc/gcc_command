@@ -8,3 +8,12 @@
     Gcc –c hello.s –o hello.o
 4.链接，生成可执行文件：
     Gcc hello.o –o hello
+
+
+
+
+
+
+
+gcc thread_demo1.c -o thread_demo1 -lpthread
+ -l参数就是用来指定程序要链接的库
