@@ -48,7 +48,18 @@ public class TomcatApplication {
      *                                     "comments":"执行new SocketProcessor（），SocketProcessor会交给handler处理"
      *                                 },
      *                                 "handler":{
-     *                                     "comments":"1. 该handler为ConnectionHandler，handler回去创建new Http11Processor（），然后交给Http11Processor 2. Http11Processor会执行Http11Processor.process, Http11Processor.service, 然后调用getAdapter() .service交给adpater处理，这里的adapter就是 .connectors中的adapter。3.adapter.service会去调用connector .getService().getContainer().getPipeline().getFirst() .invoke( request, response);进入容器 4. 每个容器（engine，host，context）都有自己的pipeline，pipeline持有Valve链表，pipeline类似于filter chain，Ｖalvｅ类似于filter"
+     *                                     "comments":"1.
+     *                                     该handler为ConnectionHandler，handler回去创建new
+     *                                     Http11Processor（），然后交给Http11Processor 2.
+     *                                     Http11Processor会执行Http11Processor.process,
+     *                                     Http11Processor.service, 然后调用getAdapter()
+     *                                     .service交给adpater处理，这里的adapter就是
+     *                                     .connectors中的adapter。3.adapter.service会通过connector
+     *                                     .getService().getMapper().map()
+     *                                     去封装mappingData映射对应的servlet，然后调用connector
+     *                                     .getService().getContainer().getPipeline().getFirst()
+     *                                     .invoke( request, response)执行servlet 4.
+     *                                     每个容器（engine，host，context）都有自己的pipeline，pipeline持有Valve链表，pipeline类似于filter chain，Ｖalvｅ类似于filter"
      *                                 }
      *                             }
      *                         },
