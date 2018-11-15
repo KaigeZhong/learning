@@ -9,6 +9,9 @@ curl -X POST -d"data=123&key=456" http://localhost:8080/search
 curl -H "Content-Type:application/json" -d '{"data":"123","key":"456"}' http://localhost:8080/search
 
 
+#只看response header
+curl -I https://www.baidu.com
+
 
 ### -f, --failed. 当类似与404错误时，服务端会返回html文档来描述错误信息，-f的作用就是curl不会输出这些错误信息
 ### -s 不显示curl进程本身的输出

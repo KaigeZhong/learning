@@ -41,14 +41,14 @@ public class TomcatApplication {
      *                                 "pollers":[
      *                                     {
      *                                         "events":"queue接收来至于acceptors的新连接",
-     *                                         "comments":"1. 将queue中的连接注册到selector中 2. 并从selector中获取key，交给executor"
+     *                                         "comments":"1. 将queue中的连接注册到selector中 2. 并从selector中获取key，交给executor， 因为poller和executor都在endpoint中，所以相互可见"
      *                                     }
      *                                 ],
      *                                 "executor":{
      *                                     "comments":"执行new SocketProcessor（），SocketProcessor会交给handler处理"
      *                                 },
      *                                 "handler":{
-     *                                     "comments":"1. 该handler为ConnectionHandler，handler回去创建new Http11Processor（），然后交给Http11Processor 2. Http11Processor会执行Http11Processor.process, Http11Processor.service, 然后调用getAdapter() .service交给adpater处理，这里的adapter就是 .connectors中的adapter。3.adapter.service会去调用connector .getService().getContainer().getPipeline().getFirst() .invoke( request, response);进入容器"
+     *                                     "comments":"1. 该handler为ConnectionHandler，handler回去创建new Http11Processor（），然后交给Http11Processor 2. Http11Processor会执行Http11Processor.process, Http11Processor.service, 然后调用getAdapter() .service交给adpater处理，这里的adapter就是 .connectors中的adapter。3.adapter.service会去调用connector .getService().getContainer().getPipeline().getFirst() .invoke( request, response);进入容器 4. 每个容器（engine，host，context）都有自己的pipeline，pipeline持有Valve链表，pipeline类似于filter chain，Ｖalvｅ类似于filter"
      *                                 }
      *                             }
      *                         },
@@ -127,6 +127,7 @@ public class TomcatApplication {
     tomcat.getHost().addChild(context);
     /**
      * 配置servlet
+     * localhost:9080/mycontext/hello
      */
     //设置servlet,也可以调用tomcat.addServlet(context, "helloServlet", new HelloServlet());
     tomcat.addServlet("/mycontext", "helloServlet", new HelloServlet());
