@@ -1,0 +1,10 @@
+1.预处理，生成预编译文件（.文件）：
+
+    Gcc –E hello.c –o hello.i
+2.编译，生成汇编代码（.s文件）：
+
+    Gcc –S hello.i –o hello.s
+3.汇编，生成目标文件（.o文件）：
+    Gcc –c hello.s –o hello.o
+4.链接，生成可执行文件：
+    Gcc hello.o –o hello
