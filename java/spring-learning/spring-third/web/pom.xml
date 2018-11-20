@@ -12,11 +12,11 @@
     </modules>
     <parent>
         <groupId>spring-learning</groupId>
-        <artifactId>spring-boot-learning</artifactId>
+        <artifactId>spring-third</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spring-boot-learning-web</artifactId>
+    <artifactId>web</artifactId>
 
     <!-- Add typical dependencies for a web application -->
     <dependencies>

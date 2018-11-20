@@ -15,7 +15,6 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>spring-boot-learning-web</module>
         <module>spring-boot-learning-basic</module>
     </modules>
 
