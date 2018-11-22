@@ -19,4 +19,7 @@ RUN wget -q https://repo1.maven.org/maven2/io/zipkin/java/zipkin-server/${ZIPKIN
 RUN mkdir -p ${ZIPKIN_HOME} && mv zipkin-server-${ZIPKIN_VERSION}-exec.jar $ZIPKIN_HOME/zipkin-server-exec.jar
 #RUN apt-get install -y unzip
 
-CMD ["bin/bash", "-c", "java -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n -jar ${ZIPKIN_HOME}/zipkin-server-exec.jar"]
+COPY run.sh /opt/
+RUN chmod 777 /opt/run.sh
+CMD ["/bin/bash", "-c", "/opt/run.sh"]
+
