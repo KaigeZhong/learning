@@ -1,0 +1,45 @@
+version: "3"
+services:
+  eureka-server:
+    image: docker-spring-cloud/docker-eureka-server:1.0-SNAPSHOT
+    container_name: eureka-server
+    ports:
+      - 8761:8761
+    networks:
+      - net_apollo
+
+  mysql_configdb:
+    image: mysql:5.7
+    container_name: mysql_configdb
+    ports:
+      - 3306:3306
+    command:
+      - --server-id=184054
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --binlog-row-image=full
+    environment:
+      - MYSQL_ROOT_PASSWORD=111111
+      - MYSQL_ROOT_HOST=%
+    networks:
+      - net_apollo
+
+  mysql_portaldb:
+    image: mysql:5.7
+    container_name: mysql_portaldb
+    ports:
+      - 3306:3306
+    command:
+      - --server-id=184054
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --binlog-row-image=full
+    environment:
+      - MYSQL_ROOT_PASSWORD=111111
+      - MYSQL_ROOT_HOST=%
+    networks:
+      - net_apollo
+
+networks:
+  net_apollo:
+    driver: bridge

@@ -28,5 +28,8 @@ public class SimpleCommandLineRunner implements CommandLineRunner {
         System.out.println(redisService.hget("hash", "a"));
         System.out.println(redisService.hmget("hash"));
 
+        redisService.publish("topic1", "topic1_message");
+        redisService.publish("topic2", "topic1_message");
+        redisService.publish("topic3", "topic1_message");
     }
 }

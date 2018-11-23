@@ -130,7 +130,6 @@ public class RedisService {
     /**
      * 递增
      * @param key 键
-     * @param by 要增加几(大于0)
      * @return
      */
     public long incr(String key, long delta){
@@ -143,7 +142,6 @@ public class RedisService {
     /**
      * 递减
      * @param key 键
-     * @param by 要减少几(小于0)
      * @return
      */
     public long decr(String key, long delta){
@@ -434,7 +432,6 @@ public class RedisService {
      * 将list放入缓存
      * @param key 键
      * @param value 值
-     * @param time 时间(秒)
      * @return
      */
     public boolean lSet(String key, Object value) {
@@ -469,7 +466,6 @@ public class RedisService {
      * 将list放入缓存
      * @param key 键
      * @param value 值
-     * @param time 时间(秒)
      * @return
      */
     public boolean lSet(String key, List<Object> value) {
@@ -532,5 +528,9 @@ public class RedisService {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public void publish(String topic, String message) {
+        redisTemplate.convertAndSend(topic, message);
     }
 }

@@ -1,0 +1,21 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - 3306:3306
+    command:
+      - --server-id=184054
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --binlog-row-image=full
+    environment:
+      - MYSQL_ROOT_PASSWORD=111111
+      - MYSQL_ROOT_HOST=%
+     #when MYSQL_USER exist, root can not access from remote host
+     # - MYSQL_USER=mysqluser
+     # - MYSQL_PASSWORD=mysqlpw
+   # volumes:
+   #   - "/mnt/docker-volumes/mysql:/var/lib/mysql"
+
