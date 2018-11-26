@@ -2,6 +2,17 @@
 
 #### configservice use the same db with adminservice. since adminservice had do db configuration, configservice do not need do it again.
 
+for loop in 1 2 3 4 5
+do
+    echo "check eureka server ""loop:""$loop"
+    echo 'select 0 from dual' | mysql -u$DB_USER -p$DB_PW --host=$DB_HOST --port=$DB_PORT
+    if [ $? == 0 ]
+    then
+        break
+    fi
+    sleep 15s
+done
+
 
 ############配置###########
 
@@ -11,5 +22,18 @@ sed -i -e '/^spring.datasource.password/c\spring.datasource.password='$DB_PW'' $
 
 sed -i '$d' $APOLLO_HOME/scripts/startup.sh
 echo "tail -f /dev/null" >> $APOLLO_HOME/scripts/startup.sh
-/bin/bash
-#$APOLLO_HOME/scripts/startup.sh
+#/bin/bash
+
+
+
+for loop in 1 2 3 4 5
+do
+    echo "check eureka server ""loop:""$loop"
+    curl $EUREKA_TEST_ADDR
+    if [ $? == 0 ]
+    then
+        break
+    fi
+    sleep 15s
+done
+$APOLLO_HOME/scripts/startup.sh

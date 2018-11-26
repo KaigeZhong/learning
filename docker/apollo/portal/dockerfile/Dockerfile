@@ -14,7 +14,7 @@ deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse\n\' /etc/apt/so
 RUN apt-get update && apt-get install -y openjdk-8-jdk
 ARG APOLLO_VERSION=1.1.2
 ENV APOLLO_HOME=/opt/apollo-portal
-RUN apt-get install -y wget
+RUN apt-get install -y wget unzip
 RUN wget https://github.com/ctripcorp/apollo/releases/download/v${APOLLO_VERSION}/apollo-portal-${APOLLO_VERSION}-github.zip \
 && unzip apollo-portal-${APOLLO_VERSION}-github.zip -d $APOLLO_HOME \
 && rm apollo-portal-${APOLLO_VERSION}-github.zip

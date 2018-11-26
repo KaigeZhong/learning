@@ -1,16 +1,16 @@
 version: "3"
 services:
-  eureka-server:
+  eurekaserverdev:
     image: docker-spring-cloud/docker-eureka-server:1.0-SNAPSHOT
-    container_name: eureka-server
+    container_name: eurekaserverdev
     ports:
       - 8761:8761
     networks:
       - net_apollo
 
-  mysql_configdb:
+  mysqlconfigdbdev:
     image: mysql:5.7
-    container_name: mysql_configdb
+    container_name: mysqlconfigdbdev
     ports:
       - 3306:3306
     command:
@@ -24,11 +24,56 @@ services:
     networks:
       - net_apollo
 
-  mysql_portaldb:
-    image: mysql:5.7
-    container_name: mysql_portaldb
+  apolloadminserverdev:
+    image: custom_apollo_adminservice:latest
+    container_name: apolloadminserverdev
     ports:
-      - 3306:3306
+      - 8090:8090
+    environment:
+      - DB_HOST=mysqlconfigdbdev
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PW=111111
+      - EUREKA_ADDRS=http://eurekaserverdev:8761/eureka/
+      - EUREKA_TEST_ADDR=eurekaserverdev:8761
+    networks:
+      - net_apollo
+    depends_on:
+      - eurekaserverdev
+      - mysqlconfigdbdev
+
+  apolloconfigserverdev:
+    image: custom_apollo_configservice:latest
+    container_name: apolloconfigserverdev
+    ports:
+      - 8080:8080
+    environment:
+      - DB_HOST=mysqlconfigdbdev
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PW=111111
+      - EUREKA_ADDRS=http://eurekaserverdev:8761/eureka/
+      - EUREKA_TEST_ADDR=eurekaserverdev:8761
+    networks:
+      - net_apollo
+    depends_on:
+      - eurekaserverdev
+      - mysqlconfigdbdev
+      - apolloadminserverdev
+
+  eurekaserverfat:
+    image: docker-spring-cloud/docker-eureka-server:1.0-SNAPSHOT
+    container_name: eurekaserverfat
+    ports:
+      - 8771:8761
+    networks:
+      - net_apollo
+
+  mysqlconfigdbfat:
+    image: mysql:5.7
+    container_name: mysqlconfigdbfat
+    ports:
+      - 3316:3306
     command:
       - --server-id=184054
       - --log-bin=mysql-bin
@@ -39,6 +84,85 @@ services:
       - MYSQL_ROOT_HOST=%
     networks:
       - net_apollo
+
+  apolloadminserverfat:
+    image: custom_apollo_adminservice:latest
+    container_name: apolloadminserverfat
+    ports:
+      - 8091:8090
+    environment:
+      - DB_HOST=mysqlconfigdbfat
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PW=111111
+      - EUREKA_ADDRS=http://eurekaserverfat:8761/eureka/
+      - EUREKA_TEST_ADDR=eurekaserverfat:8761
+    networks:
+      - net_apollo
+    depends_on:
+      - eurekaserverfat
+      - mysqlconfigdbfat
+
+  apolloconfigserverfat:
+    image: custom_apollo_configservice:latest
+    container_name: apolloconfigserverfat
+    ports:
+      - 8081:8080
+    environment:
+      - DB_HOST=mysqlconfigdbfat
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PW=111111
+      - EUREKA_ADDRS=http://eurekaserverfat:8761/eureka/
+      - EUREKA_TEST_ADDR=eurekaserverfat:8761
+    networks:
+      - net_apollo
+    depends_on:
+      - eurekaserverfat
+      - mysqlconfigdbfat
+      - apolloadminserverfat
+
+
+
+
+  mysqlportaldb:
+    image: mysql:5.7
+    container_name: mysqlportaldb
+    ports:
+      - 3317:3306
+    command:
+      - --server-id=184054
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --binlog-row-image=full
+    environment:
+      - MYSQL_ROOT_PASSWORD=111111
+      - MYSQL_ROOT_HOST=%
+    networks:
+      - net_apollo
+
+  apolloportal:
+    image: custom_apollo_portal:latest
+    container_name: apolloportal
+    #default user/password:apollo/admin
+    ports:
+      - 8070:8070
+    environment:
+      - DB_HOST=mysqlportaldb
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PW=111111
+      - APOLLO_PORTAL_ENVS=dev,fat
+      - META_SERVICE_FAT=http://apolloconfigserverfat:8080
+      - META_SERVICE_DEV=http://apolloconfigserverdev:8080
+    networks:
+      - net_apollo
+    depends_on:
+      - mysqlportaldb
+      - apolloadminserverdev 
+      - apolloconfigserverdev
+      - apolloadminserverfat
+      - apolloconfigserverfat
 
 networks:
   net_apollo:
