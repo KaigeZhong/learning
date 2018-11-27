@@ -1,3 +1,16 @@
 git提供了两种简单的patch方案。一是用git diff生成的标准patch，二是git format-patch生成的Git专用Patch。
+1.git diff/apply 
+生成patch:
+git diff > xxx.patch
+应用patch:
+git apply xxx.patch
+git apply --stat xxx.patch  #检查patch文件,检查patch文件本身有没有错
+git apply --check newpatch.patch #检查能否应用成功
 
+2.
+生成patch:
+git format-patch –n 07fe #某次提交（含）之前的几次提交, n指patch数，07fe对应提交的名称
+git format-patch -1 07fe #单次提交 
+应用patch:
+git am xxx.patch
 

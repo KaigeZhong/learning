@@ -19,7 +19,7 @@ RUN wget https://github.com/ctripcorp/apollo/releases/download/v${APOLLO_VERSION
 && unzip apollo-configservice-${APOLLO_VERSION}-github.zip -d $APOLLO_HOME \
 && rm apollo-configservice-${APOLLO_VERSION}-github.zip
 #startup.sh will use curl
-RUN apt install -y curl
+RUN apt install -y curl mysql-client
 
 ADD ./run.sh /opt/run.sh
 RUN chmod 777 /opt/run.sh

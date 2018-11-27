@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #### create db table
-for loop in 1 2 3 4 5
+while true
 do
     echo "check eureka server ""loop:""$loop"
     echo 'select 0 from dual' | mysql -u$DB_USER -p$DB_PW --host=$DB_HOST --port=$DB_PORT
@@ -9,7 +9,7 @@ do
     then
         break
     fi
-    sleep 15s
+    sleep 5s
 done
 
 cat /opt/sql/ApolloPortalDB.sql | mysql -u$DB_USER -p$DB_PW --host=$DB_HOST --port=$DB_PORT
@@ -32,7 +32,7 @@ echo "tail -f /dev/null" >> $APOLLO_HOME/scripts/startup.sh
 
 #/bin/bash
 
-for loop in 1 2 3 4 5
+while true
 do
     echo "check meta service ""loop:""$loop"
     curl $META_SERVICE_DEV
@@ -44,6 +44,7 @@ do
             break
         fi
     fi
-    sleep 15s
+    sleep 5s
 done
+
 $APOLLO_HOME/scripts/startup.sh
