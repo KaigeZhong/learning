@@ -20,7 +20,6 @@
     <modules>
         <module>spring-basic-learning</module>
         <module>spring-boot-learning</module>
-        <module>spring-cloud-learning</module>
         <module>spring-third</module>
         <module>spring-reform</module>
     </modules>

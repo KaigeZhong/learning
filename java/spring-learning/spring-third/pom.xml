@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>web</module>
+        <module>spring-cloud-learning</module>
         <module>mybatis</module>
         <module>validate</module>
         <module>swagger</module>
@@ -21,7 +23,6 @@
         <module>scheduled</module>
         <module>jmx</module>
         <module>redis</module>
-        <module>web</module>
     </modules>
 
     <dependencyManagement>
