@@ -16,6 +16,9 @@ public class TestEventHandler implements ApplicationListener<TestEvent> {
  */
 public class TestEventHandler {
 
+    /**
+     * 会通过EventListenerMethodProcessor注册ApplicationListener到spring
+     */
     @Async
     @EventListener
     public void handleTestEvent(TestEvent testEvent) {
