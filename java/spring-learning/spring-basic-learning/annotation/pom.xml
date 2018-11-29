@@ -17,7 +17,6 @@
         <module>annotation-ioc</module>
         <module>annotation-properties</module>
         <module>annotation-parentcontext</module>
-        <module>annotation-xml</module>
         <module>applicationListener</module>
         <module>annotation-conditional</module>
     </modules>

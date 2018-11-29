@@ -1,4 +1,4 @@
-package com.learning.spring.basic.annotation.xml.importresource;
+package com.learning.spring.basic.annotation.bean.xmlimportresource.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
