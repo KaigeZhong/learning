@@ -23,6 +23,7 @@
         <module>scheduled</module>
         <module>jmx</module>
         <module>redis</module>
+        <module>rabbitmq</module>
     </modules>
 
     <dependencyManagement>

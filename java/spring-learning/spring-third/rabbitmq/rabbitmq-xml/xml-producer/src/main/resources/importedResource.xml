@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <rabbit:connection-factory id="connectionFactory" host="localhost"
+                               port="5672" username="guest" password="guest" virtual-host="/"
+                               channel-cache-size="50"/>
+    <rabbit:admin connection-factory="connectionFactory"/>
+    <!--定义消息队列-->
+    <rabbit:queue name="queue.spring.xml.demo" durable="true" auto-delete="false"/>
+    <!--绑定队列-->
+    <rabbit:direct-exchange id="exchange.spring.xml.demo" name="exchange.spring.xml.demo" durable="true">
+        <rabbit:bindings>
+            <rabbit:binding queue="queue.spring.xml.demo" key="queue.spring.xml.demo.routingkey"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+    <!--创建消息队列模板-->
+    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"
+                     exchange="exchange.spring.xml.demo" >
+    </rabbit:template>
+
+</beans>

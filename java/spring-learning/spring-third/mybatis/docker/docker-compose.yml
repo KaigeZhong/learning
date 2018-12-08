@@ -14,8 +14,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=mybatis
       - MYSQL_ROOT_HOST=%
-      - MYSQL_USER=mysqluser
-      - MYSQL_PASSWORD=mysqlpw
     networks:
       - spring_third
 
