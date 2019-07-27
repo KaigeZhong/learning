@@ -1,0 +1,27 @@
+version: "3"
+services:
+  elasticsearch:
+    image: custom_elasticsearch:latest
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+
+  kibana:
+    image: custom_kibana:latest
+    container_name: kibana
+    ports:
+      - 5601:5601
+
+  logstash:
+    image: custom_logstash:latest
+    container_name: logstash
+    ports:
+      - 5044:5044
+      #监控api端口
+      - 9600:9600
+  beat:
+    image: custom_beat:latest
+    container_name: beat
+    ports:
+      #nginx port
+      - 80:80

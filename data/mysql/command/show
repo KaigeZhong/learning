@@ -1,0 +1,2 @@
+show create table 'table_name';  #显示ddl语句
+show full columns from 'table_name'; #显示列的详情，对比desc 

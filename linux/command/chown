@@ -1,0 +1,2 @@
+#更改dir文件夹及内部文件的所属用户及组为elsearch:elsearch
+chown -R elsearch:elsearch  dir

@@ -1,0 +1,2 @@
+#替换匹配的行
+sed -i -e "/^dataDir/c\dataDir=$DATA_DIR" $ZK_HOME/conf/zoo.cfg

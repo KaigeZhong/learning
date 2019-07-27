@@ -1,0 +1,22 @@
+version: "3"
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - 3306:3306
+    command:
+      - --server-id=184054
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --binlog-row-image=full
+    environment:
+      - MYSQL_ROOT_PASSWORD=111111
+      - MYSQL_ROOT_HOST=%
+    networks:
+      - jdbc
+
+networks:
+  jdbc:
+    driver: bridge
