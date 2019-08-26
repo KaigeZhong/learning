@@ -3,16 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>spring-reform</artifactId>
+        <artifactId>spring-boot-learning</artifactId>
         <groupId>spring-learning</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>apply</artifactId>
+    <artifactId>basic</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>apply-spring-third</module>
+        <module>command-line-runner</module>
+        <module>conditional</module>
+        <module>boot-properties</module>
+        <module>base</module>
+        <module>base-aop</module>
     </modules>
 
 
