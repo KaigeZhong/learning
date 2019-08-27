@@ -2,7 +2,7 @@ package com;
 
 import org.springframework.boot.SpringApplication;
 
-public class Application {
+public class WebApplication {
     public static void main(String[] args) {
         SpringApplication.run(ApplicationConfig.class, args);
         System.exit(0);
