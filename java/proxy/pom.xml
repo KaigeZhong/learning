@@ -4,12 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <artifactId>netty</artifactId>
-        <groupId>netty</groupId>
-        <relativePath>../</relativePath>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+    <groupId>proxy</groupId>
+    <artifactId>proxy</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>jdk-proxy</module>
+        <module>cglib-proxy</module>
+    </modules>
     <properties>
         <!--三个属性都是为了配置 maven-compiler-plugin-->
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -17,15 +19,5 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
-    <artifactId>netty4</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.36.Final</version>
-        </dependency>
-    </dependencies>
 
 </project>
