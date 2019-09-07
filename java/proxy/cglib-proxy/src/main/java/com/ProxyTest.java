@@ -12,8 +12,8 @@ public class ProxyTest {
         System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, ProxyTest.class.getClassLoader().getResource("").getFile());//将生成的class落盘
         Target target = new Target();
         target.setName("my name");
-//        singleCallBackProxy(target);
-        mulCallBackProxy(target);
+        singleCallBackProxy(target);
+//        mulCallBackProxy(target);
 
     }
 
@@ -68,7 +68,11 @@ public class ProxyTest {
             public Object intercept(Object obj, Method method, Object[] args,
                                     MethodProxy methodProxy) throws Throwable {
                 System.out.println(method.getName() + "执行之前做一些准备工作");
+                //走反射
                 Object result = method.invoke(target, args);
+                //走fast class索引
+//                Object result = methodProxy.invoke(target, args);//invoke只能调用target
+//                Object result = methodProxy.invokeSuper(obj, args);//invodeSuper只能调用obj也就是生成的代理
                 System.out.println(method.getName() + "执行之后做一些准备的工作");
                 return result;
             }
