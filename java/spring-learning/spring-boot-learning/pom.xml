@@ -17,6 +17,7 @@
     <modules>
         <module>web</module>
         <module>basic</module>
+        <module>DB</module>
     </modules>
 
     <dependencyManagement>

@@ -7,7 +7,8 @@ import java.lang.reflect.Proxy;
 public class ProxyTest {
     public static void main(String[] args) {
 
-        //System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");//将生成的class文件落磁盘
+        System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");//将生成的class文件落磁盘, jdk10
+        //System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");//将生成的class文件落磁盘, jdk8
         Target target = new Target();
         TargetInterface newProxyInstance = (TargetInterface) Proxy.newProxyInstance(
                 target.getClass().getClassLoader(),

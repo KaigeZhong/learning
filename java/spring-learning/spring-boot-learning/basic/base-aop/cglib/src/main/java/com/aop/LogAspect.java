@@ -11,15 +11,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LogAspect {
 
-  @Pointcut("@annotation(com.aop.AopAnnotation)")
+  @Pointcut("@annotation(com.aop.LogAopAnnotation)")
   public void pointcut(){}
 
-  @Before("pointcut()")
-  public void performance(){
-    System.out.println("log before");
-  }
   @Around("pointcut()")
-  public Object run(ProceedingJoinPoint pjp) throws Throwable {
+  public Object runLog(ProceedingJoinPoint pjp) throws Throwable {
     System.out.println("around before");
     Object proceed = pjp.proceed();
     System.out.println("around after");

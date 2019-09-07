@@ -12,8 +12,8 @@ public class ProxyTest {
         System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, ProxyTest.class.getClassLoader().getResource("").getFile());//将生成的class落盘
         Target target = new Target();
         target.setName("my name");
-        singleCallBackProxy(target);
-//        mulCallBackProxy(target);
+//        singleCallBackProxy(target);
+        mulCallBackProxy(target);
 
     }
 
