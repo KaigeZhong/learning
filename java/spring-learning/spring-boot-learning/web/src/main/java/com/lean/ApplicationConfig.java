@@ -1,4 +1,4 @@
-package com;
+package com.lean;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
