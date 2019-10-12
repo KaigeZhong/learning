@@ -1,6 +1,5 @@
 package com.lean;
 
-import com.lean.ApplicationConfig;
 import org.springframework.boot.SpringApplication;
 
 public class WebApplication {

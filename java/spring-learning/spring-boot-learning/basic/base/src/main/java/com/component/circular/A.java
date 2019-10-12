@@ -1,4 +1,4 @@
-package com.component;
+package com.component.circular;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

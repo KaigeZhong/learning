@@ -1,4 +1,4 @@
-package com.lean.config;
+package com.lean.interceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

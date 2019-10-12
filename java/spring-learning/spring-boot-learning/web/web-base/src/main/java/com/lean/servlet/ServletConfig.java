@@ -1,4 +1,4 @@
-package com.lean.config;
+package com.lean.servlet;
 
 import com.lean.servlet.MyServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;

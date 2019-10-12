@@ -1,0 +1,8 @@
+spring:
+  freemarker:
+    template-loader-path: classpath:/template/
+    suffix: .ftl
+    content-type: text/html
+    charset: UTF-8
+    settings:
+      number_format: '0.##'

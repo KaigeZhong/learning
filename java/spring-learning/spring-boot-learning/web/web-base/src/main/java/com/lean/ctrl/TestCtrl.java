@@ -12,16 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 public class TestCtrl {
     @RequestMapping("/1")
     @ResponseBody
-    public String test1(HttpServletRequest request, HttpServletResponse response) {
-        request.getRequestURI();
-        request.getHeader("Host");
-        return "success111111111111111111111111111111111";
-    }
-
-    @RequestMapping("/2")
-    @ResponseBody
-    public User test2(@RequestBody User user) {
-
+    public User test1(HttpServletRequest request, HttpServletResponse response) {
+        User user = new User();
+        user.setId("1");
+        user.setName("my name");
         return user;
     }
 }
