@@ -10,11 +10,11 @@ public class PBean {
 
     @PostConstruct
     public void init() {
-        System.out.println("init");
+        System.out.println("PostConstruct");
     }
 
     @PreDestroy
     public void close() {
-        System.out.println("init");
+        System.out.println("PreDestroy");
     }
 }
