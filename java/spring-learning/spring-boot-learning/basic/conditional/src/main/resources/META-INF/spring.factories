@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.learning.spring.boot.basic.conditional.conditionalonbean.config.ConditionalOnBeanConfigA,\
-  com.learning.spring.boot.basic.conditional.conditionalonbean.config.ConditionalOnBeanConfigB

@@ -13,9 +13,6 @@
     <artifactId>basic</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>command-line-runner</module>
-        <module>conditional</module>
-        <module>boot-properties</module>
         <module>base</module>
         <module>base-aop</module>
     </modules>
