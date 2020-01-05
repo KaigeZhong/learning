@@ -1,0 +1,2 @@
+##objdump借助BFD(Binary format descriptor)，更加通用一些, 可以应付不同文件格式. readelf则并不借助BFD，而是直接读取ELF格式文件的信息
+readelf –a hello
