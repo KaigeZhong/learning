@@ -17,3 +17,9 @@
 
 gcc thread_demo1.c -o thread_demo1 -lpthread
  -l参数就是用来指定程序要链接的库
+
+
+
+
+ gcc -fPIC -shared func.c -o libfunc.so
+生成链接库
