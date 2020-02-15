@@ -1,0 +1,1 @@
+kvm -m 512 -hda ~/opt/kvm/ubuntu16.04.img -cdrom ~/Download/ubuntu16.04.iso -boot d 

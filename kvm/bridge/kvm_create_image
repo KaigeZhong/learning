@@ -1,0 +1,1 @@
+kvm-img create ~/opt/kvm/ubuntu16.04.img 25G

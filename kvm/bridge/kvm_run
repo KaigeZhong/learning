@@ -1,0 +1,1 @@
+sudo kvm -m 1024 -hda ubuntu16.04.img -netdev tap,id=n1,ifname=tap0 -device e1000,netdev=n1 -boot c

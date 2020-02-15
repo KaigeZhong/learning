@@ -1,0 +1,2 @@
+#等价于kvm -m 1024 -hda ubuntu16.04.img -netdev user,id=n1 -device e1000,netdev=n1 -boot c
+kvm -m 1024 -hda ubuntu16.04.img -boot c
