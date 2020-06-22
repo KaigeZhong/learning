@@ -1,0 +1,8 @@
+qemu-system-i386 -S -monitor stdio
+
+
+qemu-system-i386 -S -s
+
+
+
+qemu-system-i386 -S -s -hda boot.bin

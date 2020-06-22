@@ -1,0 +1,3 @@
+as -o boot.o bootselector1.S
+
+ld -o boot.bin --oformat binary -e init -Ttext 0x7c00 boot.o
